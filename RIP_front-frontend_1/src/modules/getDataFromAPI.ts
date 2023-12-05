@@ -7,7 +7,6 @@ export interface Product {
     price: number,
     cnt: number,
     status: 'A' | 'N',
-    type: 'frames' | 'sunglasses' | 'lenses',
     param_sex?: string,
     param_material?: string,
     param_type?: string,
