@@ -19,17 +19,13 @@ export interface Product {
     image: string
 }
 
-interface Prices {
-    price_min: number,
-    price_max: number
-}
 
-export const getProductList = async (priceMin: number, priceMax: number, type: string, title: string): Promise<Product[]> => {
+export const getProductList = async (title: string): Promise<Product[]> => {
     // return fetch(`http://127.0.0.1:8080/products/?status=A&type=${type}&price_min=${priceMin}&price_max=${priceMax}&title=${title}`)
     //     .then((response) => response.json())
     //     .catch(() => [])
     try {
-        const response = await fetch(`http://127.0.0.1:8080/products/?status=A&type=${type}&price_min=${priceMin}&price_max=${priceMax}&title=${title}`)
+        const response = await fetch(`http://127.0.0.1:8080/participants/?status=A&title=${title}`)
         const result = await response.json()
         return result
     } catch (error) {
@@ -38,29 +34,13 @@ export const getProductList = async (priceMin: number, priceMax: number, type: s
             result.push(defaultProduct(i))
         }
         result = result.filter((product) => {
-            return product.price >= priceMin && product.price <= priceMax && (type == '' || product.type == type) && (title == '' || product.title.toLowerCase().includes(title.toLowerCase()))
+            return (title == '' || product.title.toLowerCase().includes(title.toLowerCase()))
         })
         return result
     }
     
 }
 
-export const getPrices = async (type: string): Promise<Prices> => {
-    // return fetch(`http://127.0.0.1:8080/prices/?status=A&type=${type}`)
-    //     .then((response) => response.json())
-    //     .catch(() => undefined)
-    try {
-        const response = await fetch(`http://127.0.0.1:8080/prices/?status=A&type=${type}`)
-        const result = await response.json()
-        return result
-    } catch (error) {
-        return {
-            price_min: 1000,
-            price_max: 3000
-        }
-    }
-    
-}
 
 export const getProduct = async (id: string): Promise<Product> => {
     // return fetch(`http://127.0.0.1:8080/products/${id}/`)

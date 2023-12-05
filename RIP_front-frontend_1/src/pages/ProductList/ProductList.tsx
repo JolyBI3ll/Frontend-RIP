@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
-import { Product, getProductList, getPrices } from '../../modules/getDataFromAPI'
+import { Product, getProductList} from '../../modules/getDataFromAPI'
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { Prices, Filter }  from '../../components/Filter/Filter';
+import { Filter }  from '../../components/Filter/Filter';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import "./ProductList.css"
 
@@ -17,14 +17,11 @@ import Col from 'react-bootstrap/Col';
 
 const ProductListPage: FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
-    const [prices, setPrices] = useState<Prices>();
     const [type, setType] = useState<string>('');
 
     const location = useLocation();
     const request = new URLSearchParams(location.search);
 
-    const requestPriceMin = request.get('price_min');
-    const requestPriceMax = request.get('price_max');
     const requestTitle = request.get('title');
 
     const requestType = request.get('type');
@@ -33,25 +30,10 @@ const ProductListPage: FC = () => {
 
     useEffect(() => {
         requestType && setType(requestType);
-
-        getPrices(type)
-        .then((response) => {
-            const minValueAbsolute = response.price_min;
-            const maxValueAbsolute = (response.price_max == 10000000000 ? 0 : response.price_max);
-            const minValue = (requestPriceMin ? parseInt(requestPriceMin) : minValueAbsolute);
-            const maxValue = (requestPriceMax ? parseInt(requestPriceMax) : maxValueAbsolute);
-            setPrices({
-                priceMin: minValue,
-                priceMax: maxValue,
-                priceMinAbsolute: minValueAbsolute,
-                priceMaxAbsolute: maxValueAbsolute
-            });
-            
-            getProductList(minValue, maxValue, type, title)
+        getProductList(title)
             .then((response) => {
                 setProducts(response);
-            });
-        })
+            })
     }, [type]);
 
     return (
@@ -61,9 +43,8 @@ const ProductListPage: FC = () => {
             </Row>
             <Row style={{ display: "flex" }}>
                 <Col style={{ width: "22%", margin: "30px" }}>
-                    {prices &&
+                    {
                     <Filter
-                        prices={prices}
                         title={title}
                     />}
                 </Col>

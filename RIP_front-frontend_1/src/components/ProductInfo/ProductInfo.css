@@ -82,12 +82,25 @@
     height: 30px;
 }
 
+.aboba{
+    display: flex;
+    width: 100px;
+    height: 30px;
+}
+
 .property-key-text {
     position: relative;
     top: -15px;
     white-space: nowrap;
     height: 100%;
     font-weight: 300;
+}
+
+.property-key-last{
+    position: relative;
+    left: 2%;
+    width: 96%;
+    height: 100%;
 }
 
 .property-key-dots {
@@ -101,7 +114,7 @@
 .product-price-card {
     position: relative;
     width: 400px;
-    height: 230px;
+    height: 160px;
     left: 150px;
     top: 140px;
     border: solid #9fd122 5px;

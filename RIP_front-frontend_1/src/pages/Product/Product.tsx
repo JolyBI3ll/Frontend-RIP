@@ -15,13 +15,10 @@ const ProductPage: FC = () => {
 
     const getParams = (source: Product) => {
         let params: Param[] = []
-        source.param_sex && params.push({key: "Пол", value: source.param_sex})
-        source.param_material && params.push({key: "Материал", value: source.param_material})
-        source.param_type &&  params.push({key: "Тип оправы", value: source.param_type})
-        source.param_color && params.push({key: "Цвет оправы", value: source.param_color})
-        source.param_form && params.push({key: "Форма", value: source.param_form})
-        source.param_time && params.push({key: "Время без замены", value: source.param_time})
-        source.param_brand && params.push({key: "Бренд", value: source.param_brand})
+        source.param_sex && params.push({key: "Дата рождения", value: source.param_sex})
+        source.param_material && params.push({key: "Рост", value: source.param_material})
+        source.param_type &&  params.push({key: "Вес", value: source.param_type})
+        source.param_color && params.push({key: "Биография", value: source.param_color})
         return params
     }
 
@@ -43,7 +40,7 @@ const ProductPage: FC = () => {
                 {id && product && <Breadcrumbs pages={[ { link: `${getBase()}/products/${id}/`, title: `${product.title}` } ]} />}
             </Row>
             <Row>
-                {product && parameters && id && <ProductInfo pk={parseInt(id)} title={product.title} price={product.price} cnt={product.cnt} parameters={parameters} image={product.image} />}
+                {product && parameters && id && <ProductInfo pk={parseInt(id)} title={product.title} cnt={product.cnt} parameters={parameters} image={product.image} />}
             </Row>
         </Container>
     )
