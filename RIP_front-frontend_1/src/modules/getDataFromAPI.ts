@@ -41,7 +41,7 @@ export const getProduct = async (id: string): Promise<Product> => {
     //     .then((response) => response.json())
     //     .catch(() => undefined)
     try {
-        const response = await fetch(`http://127.0.0.1:8080/products/${id}/`)
+        const response = await fetch(`http://127.0.0.1:8000/products/${id}/`)
         const result = await response.json()
         return result
     } catch (error) {
