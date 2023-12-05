@@ -4,16 +4,11 @@ export interface Product {
     pk: number,
     title: string,
     file_extension: 'jpg' | 'png',
-    price: number,
-    cnt: number,
     status: 'A' | 'N',
-    param_sex?: string,
-    param_material?: string,
-    param_type?: string,
-    param_color?: string,
-    param_form?: string,
-    param_time?: string,
-    param_brand: string,
+    description: string,
+    weight: string,
+    height: string,
+    bdate: string,
     last_modified: string,
     image: string
 }
@@ -24,7 +19,7 @@ export const getProductList = async (title: string): Promise<Product[]> => {
     //     .then((response) => response.json())
     //     .catch(() => [])
     try {
-        const response = await fetch(`http://127.0.0.1:8080/participants/?status=A&title=${title}`)
+        const response = await fetch(`http://127.0.0.1:8000/participants/?status=A&title=${title}`)
         const result = await response.json()
         return result
     } catch (error) {

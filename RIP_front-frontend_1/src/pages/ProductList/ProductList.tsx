@@ -50,13 +50,11 @@ const ProductListPage: FC = () => {
                 </Col>
                 <Col style={{ marginBottom: "30px", marginLeft: "10px" }}>
                     <div id="box">
-                        {products && products.map((product) => (
+                        {Array.isArray(products) && products.map((product) => (
                             <ProductCard key={product.pk.toString()}
                                 pk={product.pk}
                                 title={product.title}
-                                price={product.price}
-                                image={product.image}
-                                cnt={product.cnt}/>
+                                image={product.image}/>
                         ))}
                     </div>
                 </Col>
