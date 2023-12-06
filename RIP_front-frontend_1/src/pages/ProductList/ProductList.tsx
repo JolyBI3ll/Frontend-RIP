@@ -17,22 +17,20 @@ import Col from 'react-bootstrap/Col';
 
 const ProductListPage: FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
-    const [type, setType] = useState<string>('');
+    const [type] = useState<string>('');
 
     const location = useLocation();
     const request = new URLSearchParams(location.search);
 
     const requestTitle = request.get('title');
 
-    const requestType = request.get('type');
-
     const title = (requestTitle ? requestTitle : '');
 
     useEffect(() => {
-        requestType && setType(requestType);
         getProductList(title)
             .then((response) => {
-                setProducts(response);
+                console.log("here", response)
+                setProducts(response.Participants);
             })
     }, [type]);
 
@@ -51,9 +49,9 @@ const ProductListPage: FC = () => {
                 <Col style={{ marginBottom: "30px", marginLeft: "10px" }}>
                     <div id="box">
                         {Array.isArray(products) && products.map((product) => (
-                            <ProductCard key={product.pk.toString()}
-                                pk={product.pk}
-                                title={product.title}
+                            <ProductCard key={product.id}
+                                pk={product.id}
+                                title={product.full_name}
                                 image={product.image}/>
                         ))}
                     </div>

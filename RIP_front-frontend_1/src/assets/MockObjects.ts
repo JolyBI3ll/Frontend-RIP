@@ -1,8 +1,8 @@
 import defaultImage from '../assets/default.jpg';
 
-export interface Product {
-    pk: number,
-    title: string,
+interface Product {
+    id: number,
+    full_name: string,
     file_extension: 'jpg' | 'png',
     status: 'A' | 'N',
     description: string,
@@ -15,8 +15,8 @@ export interface Product {
 
 export const defaultProduct = (id: number): Product => {
     return {
-        pk: id,
-        title: `Участник ${id}`,
+        id: id,
+        full_name: `Участник ${id}`,
         file_extension: 'jpg',
         status: 'A',
         description: "description",

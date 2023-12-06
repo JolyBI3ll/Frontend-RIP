@@ -11,7 +11,7 @@ interface FilterData {
 
 export const Filter: FC<FilterData> = ({title}) => {
     const [inputTitle, setInputTitle] = useState(title);
-
+    
     return (
         <Container id="filter">
             <Row><h3 className="filter-title">Фильтр</h3></Row>

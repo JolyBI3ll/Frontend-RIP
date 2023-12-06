@@ -19,7 +19,7 @@ const ProductInfo: FC<Props> = ({pk, title, parameters, image}) => (
         <div className="product-info" key={pk.toString()}>
             <h4 className="product-title">{title}</h4>
             <div className="product-image-wrap">
-                <img src={image} height={300} width={700} alt="картинка" className="product-image" />
+                <img src={`data:image/jpeg;base64,${image}`} height={300} width={700} alt="картинка" className="product-image" />
             </div>
             <input type="radio" name="radio" id="product-params" defaultChecked />
             <input type="radio" name="radio" id="product-reviews" />
