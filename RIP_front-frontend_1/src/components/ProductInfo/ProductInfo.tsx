@@ -52,7 +52,7 @@ const ProductInfo: FC<Props> = ({pk, title, parameters, image}) => (
         </div>
         <div className="product-price-card">
             <h4 className="product-status-green">Активен</h4>
-            <button className="product-to-cart-green" type="button">Нанять</button>
+            <button className="product-to-cart-green" type="button">Добавить в команду</button>
         </div>
     </div>
 )
