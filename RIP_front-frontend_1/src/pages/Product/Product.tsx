@@ -5,7 +5,6 @@ import ProductInfo, {Param} from '../../components/ProductInfo/ProductInfo'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import "./Product.css"
 import { Container, Row } from 'react-bootstrap';
-import { getBase } from '../../../path_config.ts';
 
 const ProductPage: FC = () => {
     const { id } = useParams();
@@ -37,7 +36,7 @@ const ProductPage: FC = () => {
     return (
         <Container>
             <Row>
-                {id && product && <Breadcrumbs pages={[ { link: `${getBase()}/products/${id}/`, title: `${product.full_name}` } ]} />}
+                {id && product && <Breadcrumbs pages={[ { link: `/products/${id}/`, title: `${product.full_name}` } ]} />}
             </Row>
             <Row>
                 {product && parameters && id && <ProductInfo pk={parseInt(id)} title={product.full_name} parameters={parameters} image={product.image} />}
