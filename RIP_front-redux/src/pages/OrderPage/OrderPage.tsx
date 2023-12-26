@@ -13,19 +13,20 @@ import "./OrderPage.css"
 
 
 interface Position {
-    product_cnt: number,
-    product: number,
-    product_data: ProductCardData
+    is_capitan: boolean,
+    Participant: number,
+    participant_data: ProductCardData
 }
 
 interface Response {
-    pk: number,
+    id: number,
     created: string,
     send: string | undefined,
     closed: string | undefined,
+    eventstatus: string,
     status: "I" | "P" | "D" | "A" | "W",
-    user: number,
-    moderator: number,
+    user_id: number,
+    moder_id: number
     positions: Position[]
 }
 
@@ -35,10 +36,10 @@ const OrderPage: FC = () => {
     const { id } = useParams()
     const { session_id } = useSsid()
     const [ data, setData ] = useState<Response> ()
-
+    
     const getData = async () => {
         try {
-            const response = await axios(`http://localhost:8080/orders/${id}/`, {
+            const response = await axios(`http://localhost:8000/request/${id}/`, {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json; charset=UTF-8",
@@ -64,7 +65,7 @@ const OrderPage: FC = () => {
 
     const sendCart = async () => {
         try {
-            await axios(`http://localhost:8080/orders/`, {
+            await axios(`http://localhost:8000/request/`, {
                 method: "PUT",
                 headers: {
                     'authorization': session_id
@@ -78,7 +79,7 @@ const OrderPage: FC = () => {
 
     const deleteCart = async () => {
         try {
-            await axios(`http://localhost:8080/orders/`, {
+            await axios(`http://localhost:8000/request/`, {
                 method: "DELETE",
                 headers: {
                     'authorization': session_id
@@ -90,18 +91,18 @@ const OrderPage: FC = () => {
         }
     }
 
-    const deleteFromCart = async (product_id: number) => {
+    const deleteFromCart = async (participant_id: number) => {
         try {
-            const response = await axios(`http://localhost:8080/links/`, {
+            const response = await axios(`http://localhost:8000/links/`, {
                 method: "DELETE",
                 data: {
-                    'product': product_id
+                    'participant': participant_id
                 },
                 headers: {
                     'authorization': session_id
                 }
             })
-                
+            getData()
             if (response.data == "undefined") {
                 navigate('/products')
             }
@@ -137,33 +138,33 @@ const OrderPage: FC = () => {
         <> {loading ? <Loader /> :
         <Container>
             <Row>
-                {data && data.status == 'I' ? <Breadcrumbs pages={[ { link: `/orders`, title: `мои заказы` }, { link: `/orders/${id}`, title: `корзина` } ]} /> :
-                data && <Breadcrumbs pages={[ { link: `/orders`, title: `мои заказы` }, { link: `/orders/${id}`, title: `Заказ №${data.pk} от ${data.send?.slice(0, 10)}` } ]} /> }
+                {data && data.status == 'I' ? <Breadcrumbs pages={[ { link: `/orders`, title: `мои заявки` }, { link: `/orders/${id}`, title: `команда` } ]} /> :
+                data && <Breadcrumbs pages={[ { link: `/orders`, title: `мои заказы` }, { link: `/orders/${id}`, title: `Заказ №${data.id} от ${data.send?.slice(0, 10)}` } ]} /> }
             </Row>
             <Container id="cart-page" style={{ marginLeft: "30px" }}>
                 <Row style={{ display: "flex" }}>
                     <Col style={{ width: "60%" }}>
                         {data && data.status == 'I' && <h1 className="cart-main-text">Вы добавили:</h1>}
-                        {data && data.status != 'I' && <h1 className="cart-main-text" style={{ color: `${getStatusColor(getTextStatus(data.status))}` }}>{`Заказ №${data.pk} от ${data.send?.slice(0, 10)}: ${getTextStatus(data.status)}`}</h1>}
+                        {data && data.status != 'I' && <h1 className="cart-main-text" style={{ color: `${getStatusColor(getTextStatus(data.status))}` }}>{`Заказ №${data.id} от ${data.send?.slice(0, 10)}: ${getTextStatus(data.status)}`}</h1>}
                     </Col>
                     {data && data.status == 'I' && <Col style={{ display: "flex", marginTop: "22px" }}>
-                        <button className="send-button" onClick={sendCart}>Отправить заказ</button>
-                        <button className="delete-button" onClick={deleteCart}>Удалить заказ</button>
+                        <button className="send-button" onClick={sendCart}>Отправить заявку</button>
+                        <button className="delete-button" onClick={deleteCart}>Удалить заявку</button>
                     </Col>}
                 </Row>
                 <Row style={{ display: "flex", flexWrap: "wrap", height: "max-content", position: "relative", top: "-10px" }}>
                     {data && data.status == 'I' ? data.positions.map((pos: Position)  => {
-                        const product = pos.product_data
+                        const product = pos.participant_data
                         return (
                             <div>
-                                <button className="remove-button" onClick={() => {deleteFromCart(product.pk)}}>Убрать из корзины</button>
-                                <ProductCardWithCount key={product.pk} pk={product.pk} title={product.title} price={product.price} image={product.image} cnt={product.cnt} product_cnt={pos.product_cnt} can_change_cnt={true} />
+                                <button className="remove-button" onClick={() => {deleteFromCart(product.id)}}>Убрать из команды</button>
+                                <ProductCardWithCount key={product.id} id={product.id} full_name={product.full_name} image={product.image} is_capitan={pos.is_capitan} />
                             </div>
                         )}
                     ) : data && data.positions.map((pos: Position)  => {
-                        const product = pos.product_data
+                        const product = pos.participant_data
                         return (
-                            <ProductCardWithCount key={product.pk} pk={product.pk} title={product.title} price={product.price} image={product.image} cnt={product.cnt} product_cnt={pos.product_cnt} can_change_cnt={false} />
+                            <ProductCardWithCount key={product.id} id={product.id} full_name={product.full_name} image={product.image} is_capitan={pos.is_capitan} />
                         )}
                     )}
                 </Row>

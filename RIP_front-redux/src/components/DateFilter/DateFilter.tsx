@@ -1,7 +1,12 @@
 import { FC, Dispatch } from 'react';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Container } from "react-bootstrap";
+import DatePicker, { registerLocale } from "react-datepicker";
+import ru from "date-fns/locale/ru"; // the locale you want
+import "./DateFilter.css"
+registerLocale("ru", ru);
+
+
 
 interface Props {
     startDate: Date | undefined,
@@ -30,7 +35,8 @@ const DateFilter: FC<Props> = ({ startDate, setStartDate, endDate, setEndDate, s
 
     return (
         <Container id="filter-date">
-            <DatePicker
+            <DatePicker 
+                locale = "ru"
                 selected={startDate}
                 onChange={(date: Date) => setStartDate(getDefaultStartDate(date))}
                 selectsStart
@@ -39,6 +45,7 @@ const DateFilter: FC<Props> = ({ startDate, setStartDate, endDate, setEndDate, s
                 placeholderText="Дата начала"
             />
             <DatePicker
+                locale = "ru"
                 selected={endDate}
                 onChange={(date: Date) => setEndDate(getDefaultEndDate(date))}
                 selectsEnd

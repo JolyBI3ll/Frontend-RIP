@@ -21,7 +21,7 @@ export function useAuth() {
 
     const logout = async () => {
         try {
-            const response = await axios(`http://localhost:8080/accounts/logout/`, {
+            const response = await axios(`http://localhost:8000/accounts/logout/`, {
                 method: "POST",
                 headers: {
                     'authorization': session_id
@@ -38,7 +38,7 @@ export function useAuth() {
     }
 
     const login = async (formData: any) => {
-        const response = await axios(`http://127.0.0.1:8080/accounts/login/`, {
+        const response = await axios(`http://127.0.0.1:8000/accounts/login/`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -52,7 +52,7 @@ export function useAuth() {
             const data = {
                 is_authenticated: true,
                 is_moderator: response.data["is_moderator"],
-                user_id: response.data["pk"],
+                user_id: response.data["id"],
                 username: response.data["username"],
             }
 
@@ -64,7 +64,7 @@ export function useAuth() {
 
 
     const auth = async () => {
-        const response = await axios(`http://localhost:8080/accounts/check/`, {
+        const response = await axios(`http://localhost:8000/accounts/check/`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
@@ -76,7 +76,7 @@ export function useAuth() {
             const data = {
                 is_authenticated: true,
                 is_moderator: response.data["is_moderator"],
-                user_id: response.data["pk"],
+                user_id: response.data["id"],
                 username: response.data["username"],
             }
 
@@ -87,7 +87,7 @@ export function useAuth() {
     }
 
     const register = async (formData: any) => {
-        const response = await axios(`http://localhost:8080/users/`, {
+        const response = await axios(`http://localhost:8000/users/`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"

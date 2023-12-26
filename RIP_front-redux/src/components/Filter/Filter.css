@@ -24,6 +24,7 @@
 .filter-text {
     font-size: 17px;
     font-weight: 300;
+    margin-top: 30px;
 }
 
 .up {
@@ -33,7 +34,6 @@
 .filter-input {
     height: 22px;
     padding: 1px;
-    margin-left: 10px;
     margin-right: 10px;
     font-size: 14px;
 }

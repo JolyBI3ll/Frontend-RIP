@@ -1,15 +1,15 @@
 import { FC } from 'react'
 
 interface Props {
-    cartID: number
+    CurrentID: number
 }
 
-const CartButton: FC<Props> = ({ cartID }) => {
+const CartButton: FC<Props> = ({ CurrentID }) => {
     return (
-        <div style={{ position: 'relative', top: '-81px', left: '60%', width: 'max-content' }}>{
-            cartID != -1 ?
-            <a className="navbar-button" href={`/orders/${cartID}`}>Корзина</a> :
-            <a href="#" id="disabled-cart" className="disabled">Корзина</a>
+        <div style={{ position: 'relative', top: '-118px', left: '60%', width: 'max-content' }}>{
+            CurrentID != -1 ?
+            <a className="navbar-button" href={`/orders/${CurrentID}`}>Команда</a> :
+            <a href="#" id="disabled-cart" className="disabled">Команда</a>
         }</div>
     )
 }

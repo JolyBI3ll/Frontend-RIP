@@ -19,13 +19,14 @@ type Filter = {
 }
 
 interface Response {
-    pk: number,
+    id: number,
     created: string,
     send: string | undefined,
     closed: string | undefined,
+    eventstatus: string,
     status: "I" | "P" | "D" | "A" | "W",
-    user: number,
-    moderator: number
+    user_id: number,
+    moder_id: number
 }
 
 const OrderListPage: FC = () => {
@@ -65,7 +66,7 @@ const OrderListPage: FC = () => {
         try {
             console.log(`start_date = ${startDate}`)
             console.log(`end_date = ${endDate}`)
-            const { data } = await axios(`http://127.0.0.1:8080/orders/`, {
+            const { data } = await axios(`http://127.0.0.1:8000/request/`, {
                 method: "GET",
                 headers: {
                     'authorization': session_id
@@ -94,7 +95,7 @@ const OrderListPage: FC = () => {
     if (!is_authenticated && !loading) {
         return (
             <Container style={{ marginLeft: "30px" }}>
-                <h1 className="cart-help-text">Войдите в аккаунт, чтобы посмотреть список заказов</h1>
+                <h1 className="cart-help-text">Войдите в аккаунт, чтобы посмотреть список заявок</h1>
             </Container>
         )
     }
@@ -102,7 +103,7 @@ const OrderListPage: FC = () => {
     if (response && !loading && response.length == 0) {
         return (
             <Container style={{ marginLeft: "30px" }}>
-                <h1 className="cart-help-text">Вы не совершили ни одного заказа</h1>
+                <h1 className="cart-help-text">Вы не сформировали ни одну заявку</h1>
             </Container>
         )
     }
@@ -118,14 +119,26 @@ const OrderListPage: FC = () => {
         return ''
     }
 
+    const getTextEventStatus = (status: string) => {
+        if (status === 'W') {
+            return 'победа'
+        } else if (status === 'F') {
+            return 'поражение'
+        } else if (status == 'N') {
+            return 'не сыграно'
+        }
+        return ''
+    }
+
     const getTransformedData = () => {
         let result: any = []
-        response?.map((order) => {
-            if (order.status != 'I') {
+        response?.map((request) => {
+            if (request.status != 'I') {
                 result.push({
-                    pk: order.pk,
-                    send: `${order.send?.slice(0, 10)} ${order.send?.slice(11, 19)}`,
-                    status: getTextStatus(order.status)
+                    pk: request.id,
+                    send: `${request.send?.slice(0, 10)} ${request.send?.slice(11, 19)}`,
+                    status: getTextStatus(request.status),
+                    eventstatus: getTextEventStatus(request.eventstatus)
                 })
             }
         })
@@ -136,11 +149,11 @@ const OrderListPage: FC = () => {
         <> {loading ? <Loader /> :
         <Container>
             <Row>
-                <Breadcrumbs pages={[ { link: `/orders`, title: `мои заказы` } ]} />
+                <Breadcrumbs pages={[ { link: `/orders`, title: `мои заявки` } ]} />
             </Row>
             <Row style={{ display: "flex" }}>
                 <Col style={{ width: "35%" }}>
-                    <h1 className="cart-main-text" style={{ marginTop: "30px", marginLeft: "30px" }}>Список ваших заказов: </h1>
+                    <h1 className="cart-main-text" style={{ marginTop: "30px", marginLeft: "30px" }}>Список ваших заявок: </h1>
                 </Col>
                 <Col style={{ width: "25%" }}></Col>
                 <Col style={{ width: "40%" }}>
@@ -157,7 +170,7 @@ const OrderListPage: FC = () => {
                 />
             </Row>
             <Row>
-                <OrderTable orders={getTransformedData()}/>
+                <OrderTable requests={getTransformedData()}/>
             </Row>
         </Container>
         }</>

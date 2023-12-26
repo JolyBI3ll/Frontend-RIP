@@ -34,7 +34,7 @@ const Navbar: FC = () => {
                 <Row id="navbar-row" style={{ display: "flex", marginTop: "47px" }}>
                     {!is_authenticated &&
                         <Col style={{ width: "70%", marginLeft: "30px" }}>
-                            <a className="navbar-button" href="/">Смотреть товары</a>
+                            <a className="navbar-button" href="/">Смотреть участников</a>
                         </Col>
                     }
                     {!is_authenticated &&
@@ -50,12 +50,12 @@ const Navbar: FC = () => {
 
                     {is_authenticated &&
                         <Col style={{ width: "65%", marginLeft: "30px" }}>
-                            <a className="navbar-button" href="/">Смотреть товары</a>
+                            <a className="navbar-button" href="/">Смотреть участников</a>
                         </Col>
                     }
                     {is_authenticated &&
                         <Col style={{ width: "20%", marginLeft: "30px" }}>
-                            <a className="navbar-button" href="/orders">Мои заказы</a>
+                            <a className="navbar-button" href="/orders">Мои заявки</a>
                         </Col>
                     }
                     {is_authenticated && 

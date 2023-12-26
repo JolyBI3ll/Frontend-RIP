@@ -4,15 +4,11 @@ import { createSlice } from "@reduxjs/toolkit"
 interface Filter {
     cache: [],
     searchValue: string,
-    minPriceValue: number | undefined,
-    maxPriceValue: number | undefined
 }
 
 const initialState: Filter = {
     cache: [],
     searchValue: "",
-    minPriceValue: undefined,
-    maxPriceValue: undefined
 }
 
 const productFilterSlice = createSlice({
@@ -26,15 +22,9 @@ const productFilterSlice = createSlice({
         updateSearchValue(state, action) {
             state.searchValue = action.payload
         },
-        updateMinPriceValue(state, action) {
-            state.minPriceValue = action.payload
-        },
-        updateMaxPriceValue(state, action) {
-            state.maxPriceValue = action.payload
-        },
     }
 })
 
-export const { updateCache, updateSearchValue, updateMinPriceValue, updateMaxPriceValue } = productFilterSlice.actions
+export const { updateCache, updateSearchValue} = productFilterSlice.actions
 
 export default productFilterSlice.reducer

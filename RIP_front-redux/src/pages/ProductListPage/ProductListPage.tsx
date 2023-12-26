@@ -17,71 +17,52 @@ import CartButton from '../../components/CartButton/CartButton.tsx';
 
 
 export interface Product {
-    pk: number,
-    title: string,
+    id: number,
+    full_name: string,
     file_extension: 'jpg' | 'png',
-    price: number,
-    cnt: number,
     status: 'A' | 'N',
-    type: 'frames' | 'sunglasses' | 'lenses',
-    param_sex?: string,
-    param_material?: string,
-    param_type?: string,
-    param_color?: string,
-    param_form?: string,
-    param_time?: string,
-    param_brand: string,
+    description: string,
+    weight: string,
+    height: string,
+    bdate: string,
     last_modified: string,
     image: string
 }
 
 interface Response {
-    order: number,
-    products: Product[]
+    RequestId: number
+    Participants: Product[]
 }
 
 const ProductListPage: FC = () => {
     const [ loading, setLoading ] = useState<boolean> (true)
 
     const [ response, setResponse ] = useState<Response> ({
-        order: -1,
-        products: [],
+        RequestId: -1,
+        Participants: [],
     })
 
-    const { cache, searchValue, minPriceValue, maxPriceValue, setCache } = useProductFilter()
-    // const [ searchValue, setSearchValue ] = useState<string> (search)
-    // const [ minPriceValue, setMinPriceValue ] = useState<number | undefined> (minPrice)
-    // const [ maxPriceValue, setMaxPriceValue ] = useState<number | undefined> (maxPrice)
+    const { cache, searchValue, setCache } = useProductFilter()
 
     const { session_id } = useSsid()
     const { is_authenticated } = useAuth()
 
     const getFilteredProducts = async () => {
         try {
-            const { data } = await axios(`http://127.0.0.1:8080/products/`, {
+            const { data } = await axios(`http://127.0.0.1:8000/participants/`, {
                 method: "GET",
                 headers: {
                     'authorization': session_id
                 },
                 params: {
                     title: searchValue,
-                    price_min: (Number.isNaN(minPriceValue) ? undefined : minPriceValue),
-                    price_max: (Number.isNaN(maxPriceValue) ? undefined : maxPriceValue)
                 },
                 signal: AbortSignal.timeout(1000)
             })
             setResponse(data)
-            setCache(data.products)
-            // setSearchValue(searchValue)
-            // setMinPriceValue(minPriceValue)
-            // setMaxPriceValue(maxPriceValue)
-            // setProductFilter({
-            //     searchValue: searchValue,
-            //     minPriceValue: minPriceValue,
-            //     maxPriceValue: maxPriceValue
-            // })
+            setCache(data.Participants)
         } catch (error) {
-            setResponse(getDefaultResponse(3, searchValue, minPriceValue, maxPriceValue))
+            setResponse(getDefaultResponse(3, searchValue))
         }
     }
 
@@ -94,8 +75,8 @@ const ProductListPage: FC = () => {
         })
     }, [])
 
-    const addToCart = async (product_id: number) => {
-        await axios(`http://localhost:8080/products/${product_id}/`, {
+    const addToCart = async (participant_id: number) => {
+        await axios(`http://localhost:8000/participants/${participant_id}/`, {
             method: "POST",
             headers: {
                 'authorization': session_id
@@ -107,7 +88,7 @@ const ProductListPage: FC = () => {
     return (
         <> {loading ? <Loader /> :
         <Container>
-            {is_authenticated && <CartButton cartID={ response.order } />}
+            {is_authenticated && <CartButton CurrentID={ response.RequestId } />}
             <Row style={is_authenticated ? { position: 'relative', top: '-25px' } : {}}>
                 <Breadcrumbs pages={[]} />
             </Row>
@@ -122,22 +103,17 @@ const ProductListPage: FC = () => {
                         {cache.map((product: Product) => (
                             is_authenticated ?
                             <div>
-                                {product.cnt > 0 ? <button className="main-add-button" onClick={() => {addToCart(product.pk)}}>Добавить в корзину</button> :
-                                <button className="main-add-button-grey">Добавить в корзину</button>}
-                                <ProductCard key={product.pk.toString()}
-                                    pk={product.pk}
-                                    title={product.title}
-                                    price={product.price}
+                                <ProductCard key={product.id.toString()}
+                                    id={product.id}
+                                    full_name={product.full_name}
                                     image={product.image}
-                                    cnt={product.cnt}
                                 />
+                                <button onClick={() => {addToCart(product.id)}} className="main-add-button">Добавить в команду</button>
                             </div> :
-                            <ProductCard key={product.pk.toString()}
-                                pk={product.pk}
-                                title={product.title}
-                                price={product.price}
+                            <ProductCard key={product.id.toString()}
+                                id={product.id}
+                                full_name={product.full_name}
                                 image={product.image}
-                                cnt={product.cnt}
                             />
                         ))}
                     </div>

@@ -4,14 +4,15 @@ import { Container, Row, Col } from 'react-bootstrap'
 import "./OrderTable.css"
 
 
-interface Order {
+interface Request {
     pk: number,
     send: string,
-    status: string
+    status: string,
+    eventstatus: string
 }
 
 interface Props {
-    orders: Order[]
+    requests: Request[]
 }
 
 const getStatusColor = (status: string) => {
@@ -26,21 +27,24 @@ const getStatusColor = (status: string) => {
     }
 }
 
-const OrderTable: FC<Props> = ({ orders }) => {
+const OrderTable: FC<Props> = ({ requests }) => {
     return (
         <Container id="order-table" style={{ marginTop: "20px", marginBottom: "50px", width: "86%", position: "relative", left: "7%" }}>
             <Row className="order-table-header" style={{ display: "flex", padding: "15px" }}>
                 <Col className="order-table-head" style={{ width: "25%" }}><h2>Номер</h2></Col>
                 <Col className="order-table-head" style={{ width: "25%" }}><h2>Дата и время отправки</h2></Col>
                 <Col className="order-table-head" style={{ width: "25%" }}><h2>Статус</h2></Col>
+                <Col className="order-table-head" style={{ width: "25%" }}><h2>Итог соревнований</h2></Col>
                 <Col className="order-table-head" style={{ width: "25%" }}><h2>Ссылка</h2></Col>
+                
             </Row>
-            {orders.map((order) => (
-                <Row className="order-table-row" key={order.pk} style={{ display: "flex", padding: "15px", backgroundColor: `${getStatusColor(order.status)}`, borderTop: "2px groove black" }}>
-                    <Col className="order-table-col" style={{ width: "25%" }}><h2>{order.pk}</h2></Col> 
-                    <Col className="order-table-col" style={{ width: "25%" }}><h2>{order.send}</h2></Col>
-                    <Col className="order-table-col" style={{ width: "25%" }}><h2>{order.status}</h2></Col>
-                    <Col className="order-table-col" style={{ width: "25%" }}><a href={`/orders/${order.pk}`}><h2>посмотреть</h2></a></Col>
+            {requests.map((request) => (
+                <Row className="order-table-row" key={request.pk} style={{ display: "flex", padding: "15px", backgroundColor: `${getStatusColor(request.status)}`, borderTop: "2px groove black" }}>
+                    <Col className="order-table-col" style={{ width: "25%" }}><h2>{request.pk}</h2></Col> 
+                    <Col className="order-table-col" style={{ width: "25%" }}><h2>{request.send}</h2></Col>
+                    <Col className="order-table-col" style={{ width: "25%" }}><h2>{request.status}</h2></Col>
+                    <Col className="order-table-col" style={{ width: "25%" }}><h2>{request.eventstatus}</h2></Col>
+                    <Col className="order-table-col" style={{ width: "25%" }}><a href={`/orders/${request.pk}`}><h2>посмотреть</h2></a></Col>
                 </Row>
             ))}
         </Container>

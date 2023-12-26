@@ -10,7 +10,7 @@
 .main-add-button {
     position: relative;
     left: 90px;
-    top: 75px;
+    top: -60px;
     border-radius: 7px;
     width: 200px;
     height: 35px;
@@ -27,7 +27,7 @@
 .main-add-button-grey {
     position: relative;
     left: 90px;
-    top: 75px;
+    top: -60px;
     border-radius: 7px;
     width: 200px;
     height: 35px;

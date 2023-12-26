@@ -22,18 +22,15 @@ const ProductPage: FC = () => {
 
     const getParams = (source: Product) => {
         let params: Param[] = []
-        source.param_sex && params.push({key: "Пол", value: source.param_sex})
-        source.param_material && params.push({key: "Материал", value: source.param_material})
-        source.param_type &&  params.push({key: "Тип оправы", value: source.param_type})
-        source.param_color && params.push({key: "Цвет оправы", value: source.param_color})
-        source.param_form && params.push({key: "Форма", value: source.param_form})
-        source.param_time && params.push({key: "Время без замены", value: source.param_time})
-        source.param_brand && params.push({key: "Бренд", value: source.param_brand})
+        source.bdate && params.push({key: "Дата рождения", value: source.bdate})
+        source.height && params.push({key: "Рост", value: source.height})
+        source.weight &&  params.push({key: "Вес", value: source.weight})
+        source.description && params.push({key: "Биография", value: source.description})
         return params
     }
 
     const getProduct = async () => {
-        const { data } = await axios(`http://127.0.0.1:8080/products/${id}/`, {
+        const { data } = await axios(`http://127.0.0.1:8000/participants/${id}/`, {
                 method: "GET",
                 headers: {
                     'authorization': session_id
@@ -50,10 +47,10 @@ const ProductPage: FC = () => {
     return (
         <Container>
             <Row>
-                {product && id && <Breadcrumbs pages={[ { link: `/products/${id}`, title: `${product.title}` } ]} />}
+                {product && id && <Breadcrumbs pages={[ { link: `/products/${id}`, title: `${product.full_name}` } ]} />}
             </Row>
             <Row>
-                {product && id && <ProductInfo pk={parseInt(id)} title={product.title} price={product.price} cnt={product.cnt} parameters={parameters} image={product.image} />}
+                {product && id && <ProductInfo id={parseInt(id)} full_name={product.full_name} parameters={parameters} image={product.image} />}
             </Row>
         </Container>
     )
