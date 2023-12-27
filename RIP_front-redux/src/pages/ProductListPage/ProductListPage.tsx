@@ -53,22 +53,43 @@ const ProductListPage: FC = () => {
     is_moderator && navigate('/')
 
     const getFilteredProducts = async () => {
-        try {
-            const { data } = await axios(`http://127.0.0.1:8000/participants/`, {
-                method: "GET",
-                headers: {
-                    'authorization': session_id
-                },
-                params: {
-                    title: searchValue,
-                },
-                signal: AbortSignal.timeout(1000)
-            })
-            setResponse(data)
-            dispatch(updateSearchValue(searchValue))
-        } catch (error) {
-            setResponse(getDefaultResponse(3, searchValue))
+        if (is_moderator){
+            try {
+                const { data } = await axios(`http://127.0.0.1:8000/participants/`, {
+                    method: "GET",
+                    headers: {
+                        'authorization': session_id
+                    },
+                    params: {
+                        title: searchValue,
+                    },
+                    signal: AbortSignal.timeout(1000)
+                })
+                setResponse(data)
+                dispatch(updateSearchValue(searchValue))
+            } catch (error) {
+                setResponse(getDefaultResponse(3, searchValue))
+            }
         }
+        else{
+            try {
+                const { data } = await axios(`http://127.0.0.1:8000/participants/?status=A`, {
+                    method: "GET",
+                    headers: {
+                        'authorization': session_id
+                    },
+                    params: {
+                        title: searchValue,
+                    },
+                    signal: AbortSignal.timeout(1000)
+                })
+                setResponse(data)
+                dispatch(updateSearchValue(searchValue))
+            } catch (error) {
+                setResponse(getDefaultResponse(3, searchValue))
+            }
+        }
+        
     }
 
     useEffect(() => {

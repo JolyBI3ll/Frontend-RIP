@@ -153,7 +153,9 @@ const OrderListPage: FC = () => {
             if (request.status != 'I') {
                 result.push({
                     pk: request.id,
-                    send: `${request.send?.slice(0, 10)} ${request.send?.slice(11, 19)}`,
+                    send: `${request.send?.slice(0, 10)}, ${request.send?.slice(11, 19)}`,
+                    closed: `${request.closed?.slice(0, 10)}, ${request.closed?.slice(11, 19)}`,
+                    created: `${request.created?.slice(0, 10)}, ${request.created?.slice(11, 19)}`,
                     status: getTextStatus(request.status),
                     username: request.username,
                     eventstatus: getTextPayment(request.eventstatus)

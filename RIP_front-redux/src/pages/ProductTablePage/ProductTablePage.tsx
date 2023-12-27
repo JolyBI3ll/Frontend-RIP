@@ -110,7 +110,7 @@ const ProductTablePage: FC = () => {
                         setSearchValue={setSearchValue}
                         send={getFilteredProducts}
                     />
-                    <button className="create-product-button" onClick={() => navigate(`/products/create`)}>Создать участник</button>
+                    <button className="create-product-button" onClick={() => navigate(`/products/create`)}>Создать участника</button>
                 </Col>
                 <ProductTable
                     participants={getTransformedData()}
