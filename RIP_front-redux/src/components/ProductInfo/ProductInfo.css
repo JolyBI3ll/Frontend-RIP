@@ -26,6 +26,8 @@
 }
 
 .product-image {
+    width: 700px;
+    height: 300px;
     position: relative;
     transform: translateY(-50%);
     top: 50%;

@@ -1,17 +1,15 @@
-import { FC } from "react";
+import { Dispatch, FC } from "react";
 
 import { Container, Row } from "react-bootstrap";
 import "./Filter.css";
-import { useProductFilter } from "../../hooks/useProductFilter";
-
 
 interface FilterData {
+    searchValue: string,
+    setSearchValue: Dispatch<string>,
     send: () => any,
 }
 
-const Filter: FC<FilterData> = ({ send }) => {
-    const { searchValue, setSearchValue} = useProductFilter()
-
+const Filter: FC<FilterData> = ({ searchValue, setSearchValue, send}) => {
     return (
         <Container id="filter">
             <Row><h3 className="filter-title">Фильтр</h3></Row>

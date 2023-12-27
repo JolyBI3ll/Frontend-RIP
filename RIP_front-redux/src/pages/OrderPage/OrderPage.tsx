@@ -139,13 +139,13 @@ const OrderPage: FC = () => {
         <Container>
             <Row>
                 {data && data.status == 'I' ? <Breadcrumbs pages={[ { link: `/orders`, title: `мои заявки` }, { link: `/orders/${id}`, title: `команда` } ]} /> :
-                data && <Breadcrumbs pages={[ { link: `/orders`, title: `мои заказы` }, { link: `/orders/${id}`, title: `Заказ №${data.id} от ${data.send?.slice(0, 10)}` } ]} /> }
+                data && <Breadcrumbs pages={[ { link: `/orders`, title: `мои заявки` }, { link: `/orders/${id}`, title: `Заявка №${data.id} от ${data.send?.slice(0, 10)}` } ]} /> }
             </Row>
             <Container id="cart-page" style={{ marginLeft: "30px" }}>
                 <Row style={{ display: "flex" }}>
                     <Col style={{ width: "60%" }}>
                         {data && data.status == 'I' && <h1 className="cart-main-text">Вы добавили:</h1>}
-                        {data && data.status != 'I' && <h1 className="cart-main-text" style={{ color: `${getStatusColor(getTextStatus(data.status))}` }}>{`Заказ №${data.id} от ${data.send?.slice(0, 10)}: ${getTextStatus(data.status)}`}</h1>}
+                        {data && data.status != 'I' && <h1 className="cart-main-text" style={{ color: `${getStatusColor(getTextStatus(data.status))}` }}>{`Заявка №${data.id} от ${data.send?.slice(0, 10)}: ${getTextStatus(data.status)}`}</h1>}
                     </Col>
                     {data && data.status == 'I' && <Col style={{ display: "flex", marginTop: "22px" }}>
                         <button className="send-button" onClick={sendCart}>Отправить заявку</button>

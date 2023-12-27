@@ -1,20 +1,19 @@
 import { FC, useState, useEffect } from 'react';
 import { useSsid } from "../../hooks/useSsid.ts";
 import { useAuth } from '../../hooks/useAuth.ts';
-import { useProductFilter } from '../../hooks/useProductFilter.ts';
-
+// import { useProductFilter } from '../../hooks/useProductFilter.ts';
 import axios from "axios";
 import { getDefaultResponse } from '../../assets/MockObjects.ts';
-
+import { updateSearchValue } from '../../store/productFilterSlice.ts';
 import ProductCard from "../../components/ProductCard/ProductCard.tsx";
 import Filter from '../../components/Filter/Filter.tsx';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.tsx';
 import Loader from '../../components/Loader/Loader.tsx';
-
+import { useDispatch, useStore } from 'react-redux';
 import { Col, Container, Row } from 'react-bootstrap';
 import "./ProductListPage.css";
 import CartButton from '../../components/CartButton/CartButton.tsx';
-
+import { useNavigate } from 'react-router-dom';
 
 export interface Product {
     id: number,
@@ -42,10 +41,16 @@ const ProductListPage: FC = () => {
         Participants: [],
     })
 
-    const { cache, searchValue, setCache } = useProductFilter()
+    //@ts-ignore
+    const [ searchValue, setSearchValue ] = useState<string> (useStore().getState().productFilter.searchValue)
+    
 
     const { session_id } = useSsid()
-    const { is_authenticated } = useAuth()
+    const { is_authenticated, is_moderator } = useAuth()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    is_moderator && navigate('/')
 
     const getFilteredProducts = async () => {
         try {
@@ -60,7 +65,7 @@ const ProductListPage: FC = () => {
                 signal: AbortSignal.timeout(1000)
             })
             setResponse(data)
-            setCache(data.Participants)
+            dispatch(updateSearchValue(searchValue))
         } catch (error) {
             setResponse(getDefaultResponse(3, searchValue))
         }
@@ -73,7 +78,7 @@ const ProductListPage: FC = () => {
             console.log(error)
             setLoading(false)
         })
-    }, [])
+    }, [dispatch])
 
     const addToCart = async (participant_id: number) => {
         await axios(`http://localhost:8000/participants/${participant_id}/`, {
@@ -95,14 +100,16 @@ const ProductListPage: FC = () => {
             <Row style={is_authenticated ? { display: 'flex', position: 'relative', top: '-25px' } : {display: 'flex'}}>
                 <Col style={{ width: "22%", margin: "30px" }}>
                     <Filter
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
                         send={getFilteredProducts}
                     />
                 </Col>
                 <Col style={{ marginBottom: "30px", marginLeft: "10px" }}>
                     <div id="box">
-                        {cache.map((product: Product) => (
+                        {response.Participants.map((product: Product, index) => (
                             is_authenticated ?
-                            <div>
+                            <div key = {index}>
                                 <ProductCard key={product.id.toString()}
                                     id={product.id}
                                     full_name={product.full_name}
