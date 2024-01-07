@@ -88,12 +88,11 @@ const ProductListPage: FC = () => {
     return (
         <> {loading ? <Loader /> :
         <Container>
-            {is_authenticated && <CartButton CurrentID={ response.RequestId } />}
-            <Row style={is_authenticated ? { position: 'relative', top: '-25px' } : {}}>
+            <Row style={is_authenticated ? { position: 'relative'} : {}}>
                 <Breadcrumbs pages={[]} />
             </Row>
             <Row style={is_authenticated ? { display: 'flex', position: 'relative', top: '-25px' } : {display: 'flex'}}>
-                <Col style={{ width: "22%", margin: "30px" }}>
+                <Col style={{ width: "22%", margin: "30px", marginTop: "45px" }}>
                     <Filter
                         send={getFilteredProducts}
                     />

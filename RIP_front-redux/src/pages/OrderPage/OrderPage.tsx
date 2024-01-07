@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSsid } from '../../hooks/useSsid';
-
 import ProductCardWithCount, { ProductCardData } from "../../components/ProductCardWithCount/ProductCardWithCount";
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Loader from '../../components/Loader/Loader.tsx';
@@ -158,13 +157,13 @@ const OrderPage: FC = () => {
                         return (
                             <div>
                                 <button className="remove-button" onClick={() => {deleteFromCart(product.id)}}>Убрать из команды</button>
-                                <ProductCardWithCount key={product.id} id={product.id} full_name={product.full_name} image={product.image} is_capitan={pos.is_capitan} />
+                                <ProductCardWithCount key={product.id} id={product.id} full_name={product.full_name} image={product.image} is_capitan={pos.is_capitan} buttonStatus = {true} getData={getData}/>
                             </div>
                         )}
                     ) : data && data.positions.map((pos: Position)  => {
                         const product = pos.participant_data
                         return (
-                            <ProductCardWithCount key={product.id} id={product.id} full_name={product.full_name} image={product.image} is_capitan={pos.is_capitan} />
+                            <ProductCardWithCount key={product.id} id={product.id} full_name={product.full_name} image={product.image} is_capitan={pos.is_capitan} buttonStatus = {false} getData={getData}/>
                         )}
                     )}
                 </Row>

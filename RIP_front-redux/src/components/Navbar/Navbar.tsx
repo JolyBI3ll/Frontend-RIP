@@ -1,23 +1,55 @@
 import { FC, useEffect, useState} from 'react'
-
+import { useSsid } from "../../hooks/useSsid.ts";
 import { useAuth } from '../../hooks/useAuth';
-
+import CartButton from '../../components/CartButton/CartButton.tsx';
 import { EmptyLoader } from '../../components/Loader/Loader.tsx';
 import HeadTitle from '../HeadTitle/HeadTitle.tsx';
-
+import axios from "axios";
 import { Container, Row, Col } from 'react-bootstrap'
 import "./Navbar.css"
 
+interface Response {
+    RequestId: number
+}
 
 const Navbar: FC = () => {
     const [ loading, setLoading ] = useState<boolean> (true)
     const { is_authenticated, username, auth } = useAuth()
+    const { session_id } = useSsid()
+    const [ response, setResponse ] = useState<Response> ({
+        RequestId: -1
+    })
+    
+    const getFilteredProducts = async () => {
+        try {
+            const { data } = await axios(`http://127.0.0.1:8000/participants/`, {
+                method: "GET",
+                headers: {
+                    'authorization': session_id
+                },
+                signal: AbortSignal.timeout(1000)
+            })
+            setResponse(data)
+        } catch (error) {
+            console.log("Возникла ошибка!")
+        }
+    }
 
     const getData = async () => {
         await auth()
     }
+    
+    getFilteredProducts()
 
     useEffect(() => {
+        
+        getFilteredProducts().then(() => {
+            setLoading(false)
+        }).catch((error) => {
+            console.log(error)
+            setLoading(false)
+        })
+
         getData().then(() => {
             setLoading(false)
         }).catch((error) => {
@@ -37,6 +69,7 @@ const Navbar: FC = () => {
                             <a className="navbar-button" href="/">Смотреть участников</a>
                         </Col>
                     }
+                    
                     {!is_authenticated &&
                         <Col style={{ width: "15%", marginLeft: "30px" }}>
                             <a className="navbar-button" href="/register">Регистрация</a>
@@ -47,17 +80,18 @@ const Navbar: FC = () => {
                             <a className="navbar-button" href="/login">Вход</a>
                         </Col>
                     }   
-
                     {is_authenticated &&
                         <Col style={{ width: "65%", marginLeft: "30px" }}>
                             <a className="navbar-button" href="/">Смотреть участников</a>
                         </Col>
                     }
+                    {is_authenticated && <CartButton CurrentID={ response.RequestId } />}
                     {is_authenticated &&
                         <Col style={{ width: "20%", marginLeft: "30px" }}>
                             <a className="navbar-button" href="/orders">Мои заявки</a>
                         </Col>
                     }
+                    
                     {is_authenticated && 
                         <Col style={{ width: "15%", marginLeft: "30px" }}>
                             <a className="navbar-button" href="/profile" style={{ color: "rgb(255, 69, 106)" }}>{username}</a>
