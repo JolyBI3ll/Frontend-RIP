@@ -50,8 +50,11 @@ const OrderPage: FC = () => {
                 },
             })
             setData(response.data)
+            console.log(response.status)
+            
         } catch (error) {
             console.log(error)
+            resetButton()
             navigate('/products')
         }
         
@@ -74,6 +77,7 @@ const OrderPage: FC = () => {
                     'authorization': session_id
                 }
             })
+            resetButton()
             navigate('/orders')
         } catch (error) {
             console.log(error)
@@ -109,7 +113,6 @@ const OrderPage: FC = () => {
             })
             getData()
             if (response.data == "undefined") {
-                resetButton()
                 navigate('/products')
             }
         } catch (error) {

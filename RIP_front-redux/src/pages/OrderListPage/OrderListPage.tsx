@@ -25,8 +25,8 @@ interface Response {
     closed: string | undefined,
     eventstatus: string,
     status: "I" | "P" | "D" | "A" | "W",
-    user_id: number,
-    moder_id: number
+    username: string,
+    modername: string,
 }
 
 const OrderListPage: FC = () => {
@@ -125,21 +125,37 @@ const OrderListPage: FC = () => {
         } else if (status === 'F') {
             return 'поражение'
         } else if (status == 'N') {
-            return 'не сыграно'
+            return 'Еще не сыграно...'
         }
         return ''
     }
 
     const getTransformedData = () => {
         let result: any = []
-        response?.map((request) => {
+        response?.map((request: Response) => {
             if (request.status != 'I') {
-                result.push({
+                if(request.closed == undefined){
+                    result.push({
+                        pk: request.id,
+                        send: `${request.send?.slice(0, 10)}, ${request.send?.slice(11, 19)}`,
+                        closed: `-`,
+                        created: `${request.created?.slice(0, 10)}, ${request.created?.slice(11, 19)}`,
+                        status: getTextStatus(request.status),
+                        username: request.username,
+                        eventstatus: getTextEventStatus(request.eventstatus)
+                    })
+                }
+                else{
+                    result.push({
                     pk: request.id,
-                    send: `${request.send?.slice(0, 10)} ${request.send?.slice(11, 19)}`,
+                    send: `${request.send?.slice(0, 10)}, ${request.send?.slice(11, 19)}`,
+                    closed: `${request.closed?.slice(0, 10)}, ${request.closed?.slice(11, 19)}`,
+                    created: `${request.created?.slice(0, 10)}, ${request.created?.slice(11, 19)}`,
                     status: getTextStatus(request.status),
+                    username: request.username,
                     eventstatus: getTextEventStatus(request.eventstatus)
-                })
+                    })
+                }
             }
         })
         return result
