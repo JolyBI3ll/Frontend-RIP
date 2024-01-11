@@ -12,8 +12,8 @@ import Loader from '../../components/Loader/Loader.tsx';
 import { useDispatch, useStore } from 'react-redux';
 import { Col, Container, Row } from 'react-bootstrap';
 import "./ProductListPage.css";
-import CartButton from '../../components/CartButton/CartButton.tsx';
 import { useNavigate } from 'react-router-dom';
+import { updateButton } from '../../store/buttonSlice.ts';
 
 export interface Product {
     id: number,
@@ -93,6 +93,13 @@ const ProductListPage: FC = () => {
     }
 
     useEffect(() => {
+        if (response.RequestId !== -1) {
+            dispatch(updateButton({ RequestId: response.RequestId }));
+        }
+        console.log(response.RequestId)
+    }, [response, dispatch]);
+
+    useEffect(() => {
         getFilteredProducts().then(() => {
             setLoading(false)
         }).catch((error) => {
@@ -114,7 +121,6 @@ const ProductListPage: FC = () => {
     return (
         <> {loading ? <Loader /> :
         <Container>
-            {is_authenticated && <CartButton CurrentID={ response.RequestId } />}
             <Row style={is_authenticated ? { position: 'relative', top: '-25px' } : {}}>
                 <Breadcrumbs pages={[]} />
             </Row>

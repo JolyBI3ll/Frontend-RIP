@@ -6,7 +6,7 @@ interface Props {
 
 const CartButton: FC<Props> = ({ CurrentID }) => {
     return (
-        <div style={{ position: 'relative', top: '-118px', left: '60%', width: 'max-content' }}>{
+        <div style={{ position: 'relative'}}>{
             CurrentID != -1 ?
             <a className="navbar-button" href={`/orders/${CurrentID}`}>Команда</a> :
             <a href="#" id="disabled-cart" className="disabled">Команда</a>

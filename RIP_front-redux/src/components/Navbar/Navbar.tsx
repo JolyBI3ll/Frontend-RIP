@@ -1,18 +1,17 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom';
-
 import { useAuth } from '../../hooks/useAuth';
-
 import HeadTitle from '../HeadTitle/HeadTitle.tsx';
-
+import CartButton from '../../components/CartButton/CartButton.tsx';
 import { Container, Row, Col } from 'react-bootstrap'
 import "./Navbar.css"
-
+import { useSelector } from 'react-redux';
 
 const Navbar: FC = () => {
     const { is_authenticated, username, is_moderator, logout } = useAuth()
     const navigate = useNavigate()
-
+    //@ts-ignore
+    const CurrentID = useSelector((state) => state.button.current_id);
     const handleLogout = async () => {
         await logout()
         navigate("/products")
@@ -34,8 +33,11 @@ const Navbar: FC = () => {
 
     const getUserNavbar = () => (
         <Row id="navbar-row" style={{ display: "flex", marginTop: "47px" }}>
-            <Col style={{ width: "60%", marginLeft: "30px" }}>
+            <Col style={{ width: "40%", marginLeft: "30px" }}>
                 <a className="navbar-button" href="/">Участники</a>
+            </Col>
+            <Col style={{ width: "20%", marginLeft: "30px" }}>
+                {is_authenticated && <CartButton CurrentID={ CurrentID } />}
             </Col>
             <Col style={{ width: "10%", marginLeft: "30px" }}>
                 <a className="navbar-button" href="/orders">Заявки</a>
@@ -73,7 +75,7 @@ const Navbar: FC = () => {
     return (
         <Row id="header">
             <HeadTitle />
-            <Container id="navbar" style={{ paddingLeft: "30px", width: "200%" }}>
+            <Container id="navbar" style={{ paddingLeft: "30px", width: "200%"}}>
                 {getNavbar()}
             </Container>
         </Row>
