@@ -5,7 +5,8 @@ import { useSsid } from '../../hooks/useSsid';
 import ProductCardWithCount, { ProductCardData } from "../../components/ProductCardWithCount/ProductCardWithCount";
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Loader from '../../components/Loader/Loader.tsx';
-
+import { useDispatch } from 'react-redux';
+import { cleanButton } from "../../store/buttonSlice.ts";
 import axios from 'axios';
 
 import "./OrderPage.css"
@@ -31,11 +32,14 @@ interface Response {
 
 const OrderPage: FC = () => {
     const [ loading, setLoading ] = useState<boolean> (true)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const { id } = useParams()
     const { session_id } = useSsid()
     const [ data, setData ] = useState<Response> ()
-    
+    const resetButton = () => {
+        dispatch(cleanButton())
+    }
     const getData = async () => {
         try {
             const response = await axios(`http://localhost:8000/request/${id}/`, {
@@ -84,7 +88,9 @@ const OrderPage: FC = () => {
                     'authorization': session_id
                 }
             })
+            resetButton()
             navigate('/products')
+
         } catch (error) {
             console.log(error)
         }
@@ -103,6 +109,7 @@ const OrderPage: FC = () => {
             })
             getData()
             if (response.data == "undefined") {
+                resetButton()
                 navigate('/products')
             }
         } catch (error) {

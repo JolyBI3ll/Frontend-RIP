@@ -11,10 +11,13 @@ const buttonSlice = createSlice({
         updateButton: (state, action) => {
             state.current_id = action.payload.RequestId
             console.log(action.payload)
+        },
+        cleanButton: (state) => {
+            state.current_id = -1
         }
     }
 })
 
-export const { updateButton } = buttonSlice.actions
+export const { updateButton, cleanButton } = buttonSlice.actions
 
 export default buttonSlice.reducer
