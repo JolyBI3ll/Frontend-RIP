@@ -7,6 +7,7 @@ import HeadTitle from '../HeadTitle/HeadTitle.tsx';
 import axios from "axios";
 import { Container, Row, Col } from 'react-bootstrap'
 import "./Navbar.css"
+import { useSelector } from 'react-redux';
 
 interface Response {
     RequestId: number
@@ -19,7 +20,8 @@ const Navbar: FC = () => {
     const [ response, setResponse ] = useState<Response> ({
         RequestId: -1
     })
-    
+    //@ts-ignore
+    const CurrentID = useSelector((state) => state.button.current_id);
     const getFilteredProducts = async () => {
         try {
             const { data } = await axios(`http://127.0.0.1:8000/participants/`, {
@@ -38,18 +40,17 @@ const Navbar: FC = () => {
     const getData = async () => {
         await auth()
     }
-    
-    getFilteredProducts()
 
     useEffect(() => {
-        
         getFilteredProducts().then(() => {
             setLoading(false)
         }).catch((error) => {
             console.log(error)
             setLoading(false)
         })
+    }, [])
 
+    useEffect(() => {
         getData().then(() => {
             setLoading(false)
         }).catch((error) => {
@@ -85,7 +86,9 @@ const Navbar: FC = () => {
                             <a className="navbar-button" href="/">Смотреть участников</a>
                         </Col>
                     }
-                    {is_authenticated && <CartButton CurrentID={ response.RequestId } />}
+                    {console.log(CurrentID)}
+                    {is_authenticated && <CartButton CurrentID={ CurrentID } />}
+
                     {is_authenticated &&
                         <Col style={{ width: "20%", marginLeft: "30px" }}>
                             <a className="navbar-button" href="/orders">Мои заявки</a>

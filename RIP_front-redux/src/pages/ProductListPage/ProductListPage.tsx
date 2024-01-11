@@ -10,10 +10,11 @@ import ProductCard from "../../components/ProductCard/ProductCard.tsx";
 import Filter from '../../components/Filter/Filter.tsx';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.tsx';
 import Loader from '../../components/Loader/Loader.tsx';
-
+import { updateButton } from '../../store/buttonSlice.ts';
 import { Col, Container, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import "./ProductListPage.css";
-import CartButton from '../../components/CartButton/CartButton.tsx';
+// import CartButton from '../../components/CartButton/CartButton.tsx';
 
 
 export interface Product {
@@ -36,7 +37,7 @@ interface Response {
 
 const ProductListPage: FC = () => {
     const [ loading, setLoading ] = useState<boolean> (true)
-
+    const dispatch = useDispatch();
     const [ response, setResponse ] = useState<Response> ({
         RequestId: -1,
         Participants: [],
@@ -46,7 +47,6 @@ const ProductListPage: FC = () => {
 
     const { session_id } = useSsid()
     const { is_authenticated } = useAuth()
-
     const getFilteredProducts = async () => {
         try {
             const { data } = await axios(`http://127.0.0.1:8000/participants/`, {
@@ -65,6 +65,13 @@ const ProductListPage: FC = () => {
             setResponse(getDefaultResponse(3, searchValue))
         }
     }
+
+    useEffect(() => {
+        if (response.RequestId !== -1) {
+            dispatch(updateButton({ RequestId: response.RequestId }));
+        }
+        console.log(response.RequestId)
+    }, [response, dispatch]);
 
     useEffect(() => {
         getFilteredProducts().then(() => {
