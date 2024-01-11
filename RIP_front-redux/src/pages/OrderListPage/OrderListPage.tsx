@@ -138,7 +138,7 @@ const OrderListPage: FC = () => {
         return ''
     }
 
-    const getTextPayment = (payment: string) => {
+    const getEventStatus = (payment: string) => {
         if (payment === 'W') {
             return 'победа'
         } else if (payment == 'F') {
@@ -159,7 +159,7 @@ const OrderListPage: FC = () => {
                         created: `${request.created?.slice(0, 10)}, ${request.created?.slice(11, 19)}`,
                         status: getTextStatus(request.status),
                         username: request.username,
-                        eventstatus: getTextPayment(request.eventstatus)
+                        eventstatus: getEventStatus(request.eventstatus)
                     })
                 }
                 else{
@@ -170,7 +170,7 @@ const OrderListPage: FC = () => {
                     created: `${request.created?.slice(0, 10)}, ${request.created?.slice(11, 19)}`,
                     status: getTextStatus(request.status),
                     username: request.username,
-                    eventstatus: getTextPayment(request.eventstatus)
+                    eventstatus: getEventStatus(request.eventstatus)
                     })
                 }
             }
