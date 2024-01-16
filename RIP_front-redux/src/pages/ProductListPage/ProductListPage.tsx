@@ -12,7 +12,6 @@ import Loader from '../../components/Loader/Loader.tsx';
 import { useDispatch, useStore } from 'react-redux';
 import { Col, Container, Row } from 'react-bootstrap';
 import "./ProductListPage.css";
-import { useNavigate } from 'react-router-dom';
 import { updateButton } from '../../store/buttonSlice.ts';
 
 export interface Product {
@@ -46,50 +45,28 @@ const ProductListPage: FC = () => {
     
 
     const { session_id } = useSsid()
-    const { is_authenticated, is_moderator } = useAuth()
+    const { is_authenticated } = useAuth()
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
-    is_moderator && navigate('/')
 
     const getFilteredProducts = async () => {
-        if (is_moderator){
-            try {
-                const { data } = await axios(`http://127.0.0.1:8000/participants/`, {
-                    method: "GET",
-                    headers: {
-                        'authorization': session_id
-                    },
-                    params: {
-                        title: searchValue,
-                    },
-                    signal: AbortSignal.timeout(1000)
-                })
-                setResponse(data)
-                dispatch(updateSearchValue(searchValue))
-            } catch (error) {
-                setResponse(getDefaultResponse(3, searchValue))
-            }
+        try {
+            const { data } = await axios(`http://127.0.0.1:8000/participants/`, {
+                method: "GET",
+                headers: {
+                    'authorization': session_id
+                },
+                params: {
+                    title: searchValue,
+                    status: 'A'
+                },
+                signal: AbortSignal.timeout(1000)
+            })
+            setResponse(data)
+            dispatch(updateSearchValue(searchValue))
+        } catch (error) {
+            setResponse(getDefaultResponse(3, searchValue))
         }
-        else{
-            try {
-                const { data } = await axios(`http://127.0.0.1:8000/participants/?status=A`, {
-                    method: "GET",
-                    headers: {
-                        'authorization': session_id
-                    },
-                    params: {
-                        title: searchValue,
-                    },
-                    signal: AbortSignal.timeout(1000)
-                })
-                setResponse(data)
-                dispatch(updateSearchValue(searchValue))
-            } catch (error) {
-                setResponse(getDefaultResponse(3, searchValue))
-            }
-        }
-        
     }
 
     useEffect(() => {

@@ -21,7 +21,6 @@ import { store, persistor } from "./store/store.ts";
 import { Container, Row } from "react-bootstrap";
 import "./main.css";
 
-import { useAuth } from "./hooks/useAuth.ts";
 import { FC } from "react";
 
 
@@ -32,10 +31,9 @@ const root = ReactDOM.createRoot(
 const queryClient = new QueryClient();
 
 const App: FC = () => {
-    const { is_moderator } = useAuth()
 
     const getStartPage = () => {
-        return (is_moderator ? '/product-table' : '/products')
+        return '/products'
     }
 
     return (

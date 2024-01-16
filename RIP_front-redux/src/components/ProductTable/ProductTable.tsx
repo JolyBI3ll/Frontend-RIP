@@ -35,6 +35,9 @@ const ProductTable: FC<Props> = ({ participants, deleteProduct }) => {
         if (status == 'N'){
             return "rgb(237, 104, 137)"
         }
+        else{
+            return "rgb(255,255, 255)"
+        }
     }
 
     return (

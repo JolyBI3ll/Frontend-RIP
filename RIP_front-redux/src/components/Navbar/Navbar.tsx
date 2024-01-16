@@ -20,7 +20,7 @@ const Navbar: FC = () => {
     const getGuestNavbar = () => (
         <Row id="navbar-row" style={{ display: "flex", marginTop: "47px" }}>
             <Col style={{ width: "75%", marginLeft: "30px" }}>
-                <a className="navbar-button" href="/">Участники</a>
+                <a className="navbar-button" href="products/">Участники</a>
             </Col>
             <Col style={{ width: "15%", marginLeft: "30px" }}>
                 <a className="navbar-button" href="/register">Регистрация</a>
@@ -34,7 +34,7 @@ const Navbar: FC = () => {
     const getUserNavbar = () => (
         <Row id="navbar-row" style={{ display: "flex", marginTop: "47px" }}>
             <Col style={{ width: "40%", marginLeft: "30px" }}>
-                <a className="navbar-button" href="/">Участники</a>
+                <a className="navbar-button" href="products/">Участники</a>
             </Col>
             <Col style={{ width: "20%", marginLeft: "30px" }}>
                 {is_authenticated && <CartButton CurrentID={ CurrentID } />}
@@ -42,7 +42,7 @@ const Navbar: FC = () => {
             <Col style={{ width: "10%", marginLeft: "30px" }}>
                 <a className="navbar-button" href="/orders">Заявки</a>
             </Col>
-            <Col style={{ width: "20%", marginLeft: "30px" }}>
+            <Col style={{ width: "30%", marginLeft: "30px" }}>
                 <a className="navbar-button" href="#" onClick={ handleLogout }>{`${username}: выход`}</a>
             </Col>
         </Row>
@@ -51,12 +51,15 @@ const Navbar: FC = () => {
     const getModerNavbar = () => (
         <Row id="navbar-row" style={{ display: "flex", marginTop: "47px" }}>
             <Col style={{ width: "60%", marginLeft: "30px" }}>
-                <a className="navbar-button" href="/">Участники</a>
+                <a className="navbar-button" href="/products">Участники</a>
+            </Col>
+            <Col style={{ width: "50%" }}>
+                <a className="navbar-button" href="/product-table">Таблица участников</a>
             </Col>
             <Col style={{ width: "10%", marginLeft: "30px" }}>
                 <a className="navbar-button" href="/orders">Заявки</a>
             </Col>
-            <Col style={{ width: "20%", marginLeft: "30px" }}>
+            <Col style={{ width: "40%", marginLeft: "30px" }}>
                 <a className="navbar-button" href="#" onClick={ handleLogout }>{`${username}: выход`}</a>
             </Col>
         </Row>

@@ -6,3 +6,16 @@
     background-color: rgb(187, 187, 250);
     cursor: pointer;
 }
+
+.popup-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fee;
+    color: #f00;
+    padding: 10px;
+    border: 1px solid #f00;
+    border-radius: 5px;
+    z-index: 1000; /* чтобы окно было поверх других элементов */
+}

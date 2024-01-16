@@ -30,7 +30,7 @@ const LoginPage: FC = () => {
                 <Container style={{ marginLeft: "30px", marginTop: "30px" }}>
                     <Row style={{ display: "flex" }}>
                         <h1 style={{ fontSize: "36px", fontWeight: "500" }}>Вход в аккаунт</h1>
-                        <a href="/register" className="form-link"><h3>Регистрация</h3></a>
+                        <a href="/register" className="form-link"><h3>Перейти к регистрации</h3></a>
                     </Row>
                     <form onSubmit={ handleLogin } id="login-form" style={{ marginTop: "30px" }}>
                         <Row>
