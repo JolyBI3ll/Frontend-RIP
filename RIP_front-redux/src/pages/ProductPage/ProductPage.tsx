@@ -1,15 +1,13 @@
 import { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSsid } from "../../hooks/useSsid";
-
 import { Product } from '../ProductListPage/ProductListPage'
 import ProductInfo, { Param } from '../../components/ProductInfo/ProductInfo'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-
 import { Container, Row } from 'react-bootstrap';
 import "./ProductPage.css"
-
 import axios from "axios";
+import { getDefaultProduct } from '../../assets/MockObjects';
 
 
 const ProductPage: FC = () => {
@@ -30,7 +28,8 @@ const ProductPage: FC = () => {
     }
 
     const getProduct = async () => {
-        const { data } = await axios(`http://127.0.0.1:8000/participants/${id}/`, {
+        try{
+            const { data } = await axios(`http://127.0.0.1:8000/participants/${id}/`, {
                 method: "GET",
                 headers: {
                     'authorization': session_id
@@ -38,6 +37,11 @@ const ProductPage: FC = () => {
             })
         setProduct(data);
         setParameters(getParams(data));
+        }
+        catch(error){
+            id && setProduct(getDefaultProduct(parseInt(id)))
+            id && setParameters(getParams(getDefaultProduct(parseInt(id))))
+        }
     }
 
     useEffect(() => {

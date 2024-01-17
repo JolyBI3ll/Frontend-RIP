@@ -59,7 +59,7 @@ const ProductTablePage: FC = () => {
             setResponse(data)
             dispatch(updateSearchValue(searchValue))
         } catch (error) {
-            setResponse(getDefaultResponse(3, searchValue))
+            setResponse(getDefaultResponse(searchValue))
         }
     }
 
