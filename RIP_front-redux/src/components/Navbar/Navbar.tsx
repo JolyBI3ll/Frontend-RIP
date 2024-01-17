@@ -18,48 +18,51 @@ const Navbar: FC = () => {
     }
 
     const getGuestNavbar = () => (
-        <Row id="navbar-row" style={{ display: "flex", marginTop: "47px" }}>
-            <Col style={{ width: "75%", marginLeft: "30px" }}>
-                <a className="navbar-button" href="products/">Участники</a>
+        <Row id="navbar-row" style={{ display: "flex", marginTop: "47px", justifyContent: "space-between" }}>
+            <Col style={{ width: "60%" }}></Col>
+            <Col style={{ width: "12%" }}>
+                <a className="navbar-button" href="/">Участники</a>
             </Col>
-            <Col style={{ width: "15%", marginLeft: "30px" }}>
+            <Col style={{ width: "18%" }}>
                 <a className="navbar-button" href="/register">Регистрация</a>
             </Col>
-            <Col style={{ width: "10%", marginLeft: "30px" }}>
+            <Col style={{ width: "10%" }}>
                 <a className="navbar-button" href="/login">Вход</a>
             </Col>
         </Row>
     )
 
     const getUserNavbar = () => (
-        <Row id="navbar-row" style={{ display: "flex", marginTop: "47px" }}>
-            <Col style={{ width: "40%", marginLeft: "30px" }}>
-                <a className="navbar-button" href="products/">Участники</a>
+        <Row id="navbar-row" style={{ display: "flex", marginTop: "47px", justifyContent: "space-between" }}>
+            <Col style={{ width: "56%" }}></Col>
+            <Col style={{ width: "12%" }}>
+                <a className="navbar-button" href="/">Участники</a>
             </Col>
             <Col style={{ width: "20%", marginLeft: "30px" }}>
                 {is_authenticated && <CartButton CurrentID={ CurrentID } />}
             </Col>
-            <Col style={{ width: "10%", marginLeft: "30px" }}>
+            <Col style={{ width: "12%" }}>
                 <a className="navbar-button" href="/orders">Заявки</a>
             </Col>
-            <Col style={{ width: "30%", marginLeft: "30px" }}>
+            <Col style={{ width: "20%" }}>
                 <a className="navbar-button" href="#" onClick={ handleLogout }>{`${username}: выход`}</a>
             </Col>
         </Row>
     )
 
     const getModerNavbar = () => (
-        <Row id="navbar-row" style={{ display: "flex", marginTop: "47px" }}>
-            <Col style={{ width: "60%", marginLeft: "30px" }}>
-                <a className="navbar-button" href="/products">Участники</a>
+        <Row id="navbar-row" style={{ display: "flex", marginTop: "47px", justifyContent: "space-between" }}>
+            <Col style={{ width: "33%" }}></Col>
+            <Col style={{ width: "12%" }}>
+                <a className="navbar-button" href="/">Участники</a>
             </Col>
-            <Col style={{ width: "50%" }}>
+            <Col style={{ width: "23%" }}>
                 <a className="navbar-button" href="/product-table">Таблица участников</a>
             </Col>
-            <Col style={{ width: "10%", marginLeft: "30px" }}>
+            <Col style={{ width: "12%" }}>
                 <a className="navbar-button" href="/orders">Заявки</a>
             </Col>
-            <Col style={{ width: "40%", marginLeft: "30px" }}>
+            <Col style={{ width: "20%" }}>
                 <a className="navbar-button" href="#" onClick={ handleLogout }>{`${username}: выход`}</a>
             </Col>
         </Row>
@@ -78,11 +81,10 @@ const Navbar: FC = () => {
     return (
         <Row id="header">
             <HeadTitle />
-            <Container id="navbar" style={{ paddingLeft: "30px", width: "200%"}}>
+            <Container id="navbar" style={{ paddingLeft: "30px", width: "200%" }}>
                 {getNavbar()}
             </Container>
         </Row>
     )
 }
-
 export default Navbar
