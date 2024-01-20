@@ -6,7 +6,7 @@ import CartButton from '../../components/CartButton/CartButton.tsx';
 import { Container, Row, Col } from 'react-bootstrap'
 import "./Navbar.css"
 import { useSelector } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 const Navbar: FC = () => {
     const { is_authenticated, username, is_moderator, logout } = useAuth()
     const navigate = useNavigate()
@@ -21,31 +21,31 @@ const Navbar: FC = () => {
         <Row id="navbar-row" style={{ display: "flex", marginTop: "47px", justifyContent: "space-between" }}>
             <Col style={{ width: "60%" }}></Col>
             <Col style={{ width: "12%" }}>
-                <a className="navbar-button" href="/">Участники</a>
+                <Link className="navbar-button" to="/">Участники</Link>
             </Col>
             <Col style={{ width: "18%" }}>
-                <a className="navbar-button" href="/register">Регистрация</a>
+                <Link className="navbar-button" to="/register">Регистрация</Link>
             </Col>
             <Col style={{ width: "10%" }}>
-                <a className="navbar-button" href="/login">Вход</a>
+                <Link className="navbar-button" to="/login">Вход</Link>
             </Col>
         </Row>
     )
 
     const getUserNavbar = () => (
         <Row id="navbar-row" style={{ display: "flex", marginTop: "47px", justifyContent: "space-between" }}>
-            <Col style={{ width: "56%" }}></Col>
-            <Col style={{ width: "12%" }}>
-                <a className="navbar-button" href="/">Участники</a>
+            <Col style={{ width: "50%" }}></Col>
+            <Col style={{ width: "150px" }}>
+                <Link className="navbar-button" to="/">Участники</Link>
             </Col>
-            <Col style={{ width: "20%", marginLeft: "30px" }}>
+            <Col style={{ width: "150px", marginLeft: "30px" }}>
                 {is_authenticated && <CartButton CurrentID={ CurrentID } />}
             </Col>
-            <Col style={{ width: "12%" }}>
-                <a className="navbar-button" href="/orders">Заявки</a>
+            <Col style={{ width: "150px" }}>
+                <Link className="navbar-button" to="/orders">Заявки</Link>
             </Col>
-            <Col style={{ width: "20%" }}>
-                <a className="navbar-button" href="#" onClick={ handleLogout }>{`${username}: выход`}</a>
+            <Col style={{ width: "250px" }}>
+                <Link className="navbar-button" to="#" onClick={ handleLogout }>{`${username}: выход`}</Link>
             </Col>
         </Row>
     )
@@ -54,16 +54,16 @@ const Navbar: FC = () => {
         <Row id="navbar-row" style={{ display: "flex", marginTop: "47px", justifyContent: "space-between" }}>
             <Col style={{ width: "33%" }}></Col>
             <Col style={{ width: "12%" }}>
-                <a className="navbar-button" href="/">Участники</a>
+                <Link className="navbar-button" to="/">Участники</Link>
             </Col>
             <Col style={{ width: "23%" }}>
-                <a className="navbar-button" href="/product-table">Таблица участников</a>
+                <Link className="navbar-button" to="/product-table">Таблица участников</Link>
             </Col>
             <Col style={{ width: "12%" }}>
-                <a className="navbar-button" href="/orders">Заявки</a>
+                <Link className="navbar-button" to="/orders">Заявки</Link>
             </Col>
             <Col style={{ width: "20%" }}>
-                <a className="navbar-button" href="#" onClick={ handleLogout }>{`${username}: выход`}</a>
+                <Link className="navbar-button" to="#" onClick={ handleLogout }>{`${username}: выход`}</Link>
             </Col>
         </Row>
     )

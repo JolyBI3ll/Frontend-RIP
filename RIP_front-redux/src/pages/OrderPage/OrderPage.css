@@ -1,41 +1,90 @@
 .send-button {
-    border-radius: 7px;
     width: 200px;
-    height: 40px;
-    font-size: 18px;
-    background-color: rgb(187, 187, 250);
+    height: 50px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
 }
 
+.team-input {
+
+    width: 400px; /* Ширина поля ввода */
+    padding: 10px; /* Внутренние поля */
+    margin: 10px 0; /* Отступы */
+    border: 1px solid black; /* Граница */
+    border-radius: 4px; /* Скругленные углы */
+    box-sizing: border-box; /* Бордюрная модель */
+}
+
+.save-btn {
+    margin-top: 10px;
+    width: 200px;
+    height: 38px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
+    cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
+}
+
+.save-btn:hover {
+    color: #2062cb; /* Цвет фона при наведении */
+    border-color: #2062cb;
+}
 .send-button:hover {
-    background-color: rgb(158, 158, 244);
+    color: #2062cb; /* Цвет фона при наведении */
+    border-color: #2062cb;
 }
 
 .delete-button {
-    margin-left: 40px;
-    border-radius: 7px;
+    margin-left: 20px;
     width: 200px;
-    height: 40px;
-    font-size: 18px;
-    background-color: rgb(255, 154, 179);
+    height: 50px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
 }
 
 .delete-button:hover {
-    background-color: rgb(237, 104, 137);
+    color: #2062cb; /* Цвет фона при наведении */
+    border-color: #2062cb;
 }
 
 .remove-button {
     position: relative;
     left: 40px;
     top: 40px;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
     width: 303.5px;
-    height: 40px;
-    font-size: 18px;
-    background-color: rgb(250, 246, 136);
+    height: 50px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
 }
 
 .remove-button:hover {
@@ -51,7 +100,7 @@
 }
 
 .cart-main-text {
-    color:rgb(19, 113, 35);
+    color:black;
     font-size: 30px;
     letter-spacing: 3px;
     text-transform: uppercase;

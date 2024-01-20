@@ -150,7 +150,7 @@ const ProductUpdatePage: FC = () => {
                             </Row>
                             <Row>
                                 <div className="left-column"><label htmlFor="title">ФИО</label></div>
-                                <textarea
+                                <input style = {{width: "300px"}}
                                     id="full_name"
                                     name="full_name"
                                     value={values.full_name}
@@ -160,7 +160,7 @@ const ProductUpdatePage: FC = () => {
                             </Row>
                             <Row>
                                 <div className="left-column"><label htmlFor="price">Вес</label></div>
-                                <input
+                                <input style = {{width: "300px"}}
                                     type="number"
                                     id="weight"
                                     name="weight"
@@ -171,7 +171,7 @@ const ProductUpdatePage: FC = () => {
                             </Row>
                             <Row>
                                 <div className="left-column"><label htmlFor="cnt">Рост</label></div>
-                                <input
+                                <input style = {{width: "300px"}}
                                     type="number"
                                     id="height"
                                     name="height"
@@ -182,7 +182,7 @@ const ProductUpdatePage: FC = () => {
                             </Row>
                             <Row>
                                 <div className="left-column"><label htmlFor="type">Дата  рождения</label></div>
-                                <input
+                                <input style = {{width: "300px"}}
                                     type="date"
                                     id="bdate"
                                     name="bdate"

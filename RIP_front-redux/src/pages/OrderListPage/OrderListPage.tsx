@@ -25,6 +25,7 @@ interface Response {
     status: "I" | "P" | "D" | "A" | "W",
     username: string,
     modername: string,
+    team_name: string,
 }
 
 const OrderListPage: FC = () => {
@@ -159,7 +160,8 @@ const OrderListPage: FC = () => {
                         created: `${request.created?.slice(0, 10)}, ${request.created?.slice(11, 19)}`,
                         status: getTextStatus(request.status),
                         username: request.username,
-                        eventstatus: getEventStatus(request.eventstatus)
+                        eventstatus: getEventStatus(request.eventstatus),
+                        team_name: request.team_name,
                     })
                 }
                 else{
@@ -170,7 +172,8 @@ const OrderListPage: FC = () => {
                     created: `${request.created?.slice(0, 10)}, ${request.created?.slice(11, 19)}`,
                     status: getTextStatus(request.status),
                     username: request.username,
-                    eventstatus: getEventStatus(request.eventstatus)
+                    eventstatus: getEventStatus(request.eventstatus),
+                    team_name: request.team_name,
                     })
                 }
             }

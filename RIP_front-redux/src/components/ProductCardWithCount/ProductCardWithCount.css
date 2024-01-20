@@ -1,0 +1,21 @@
+.cap-button {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 260px;
+    height: 50px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
+    cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
+}
+
+.cap-button:hover {
+    color: #2062cb;
+    border-color: #2062cb;
+}

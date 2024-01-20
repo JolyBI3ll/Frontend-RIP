@@ -1,4 +1,6 @@
 import { FC } from 'react'
+import "./CartButton.css"
+import { Link } from 'react-router-dom';
 
 interface Props {
     CurrentID: number
@@ -8,8 +10,8 @@ const CartButton: FC<Props> = ({ CurrentID }) => {
     return (
         <div style={{ position: 'relative'}}>{
             CurrentID != -1 ?
-            <a className="navbar-button" href={`/orders/${CurrentID}`}>Команда</a> :
-            <a href="#" id="disabled-cart" className="disabled">Команда</a>
+            <Link className="navbar-button" to ={`/orders/${CurrentID}`}>Команда</Link> :
+            <Link to="#" className="disabled-cart-button">Команда</Link>
         }</div>
     )
 }

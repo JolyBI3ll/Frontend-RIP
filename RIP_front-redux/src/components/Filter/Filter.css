@@ -38,18 +38,33 @@
     font-size: 14px;
 }
 
+.fio-input {
+
+    width: 250px; /* Ширина поля ввода */
+    padding: 10px; /* Внутренние поля */
+    border: 1px solid black; /* Граница */
+    border-radius: 4px; /* Скругленные углы */
+    box-sizing: border-box; /* Бордюрная модель */
+}
+
 .filter-submit {
-    transform: translate(120%, -66%);
+    height: 40px;
+    width: 200px;
+    transform: translate(10%, -50%);
     padding: 5px;
-    color: white;
-    background-color: #00B90E;
-    border: none;
+    color: #2EB3EC;
+    background-color: white;
     text-transform: uppercase;
-    font-size: 13px;
-    font-weight: bold;
+    font-size: 12px;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
 }
 
 .filter-submit:hover {
-    background-color: #9fd122;
+    color: #2062cb;
+    border-color: #2062cb;
 }

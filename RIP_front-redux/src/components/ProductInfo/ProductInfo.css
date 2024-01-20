@@ -27,8 +27,8 @@
 }
 
 .product-image {
-    width: 700px;
-    height: 300px;
+    width: 800px;
+    height: 350px;
     position: relative;
     transform: translateY(-50%);
     top: 50%;
@@ -62,7 +62,9 @@
 .product-reviews-text:hover,
 #product-params:checked ~ .product-bar .product-params-text,
 #product-reviews:checked ~ .product-bar .product-reviews-text {
-    background-color: #9fd122;
+    background-color: rgb(255, 255, 240);
+    border: 1px solid rgb(0, 0, 0);
+    color: black;
 }
 
 [type="radio"], .product-params, .product-reviews {
@@ -75,6 +77,8 @@
 }
 
 .product-params {
+    margin-left: -40px;
+    margin-top: -50px;
     position: relative;
     left: 60px;
     border-spacing: 10px 15px;
@@ -107,8 +111,8 @@
     width: 400px;
     height: 230px;
     left: 150px;
-    top: 140px;
-    border: solid #9fd122 5px;
+    top: 100px;
+    border: solid black 1.5px;
     border-radius: 10px;
 }
 
@@ -167,19 +171,24 @@
     top: 30px;
     left: 50%;
     transform: translateX(-50%);
-    width: 350px;
+    width: 320px;
+    height: 50px;
     padding: 7px;
-    color: white;
+    color: #2EB3EC;
     font-size: 28px;
     font-weight: 300;
-    background-color: #00B90E;
-    border: none;
-    border-radius: 10px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 400;
+    justify-content: center;
 }
 
 .product-to-cart-green:hover {
-    background-color: #9fd122;
+    border-color: #2062cb;
+    color: #2062cb;
 }
 
 .product-to-cart-grey {

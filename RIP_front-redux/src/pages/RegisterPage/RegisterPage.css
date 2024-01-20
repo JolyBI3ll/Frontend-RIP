@@ -1,10 +1,21 @@
-#register-button {
-    border-radius: 7px;
-    width: 200px;
-    height: 40px;
-    font-size: 18px;
-    background-color: rgb(187, 187, 250);
+.button {
+    width: 320px;
+    height: 50px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
+}
+
+.button:hover{
+    color: #2062cb;
+    border-color: #2062cb;
 }
 
 .popup-message {
@@ -13,9 +24,10 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: #fee;
-    color: #f00;
+    color: rgb(85, 85, 85);
     padding: 10px;
-    border: 1px solid #f00;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 5px;
     z-index: 1000; /* чтобы окно было поверх других элементов */
 }
+

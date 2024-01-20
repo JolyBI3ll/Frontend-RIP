@@ -14,10 +14,10 @@ interface Props {
     id: number,
     full_name: string,
     parameters: Param[],
-    image: string
+    image: string,
 }
 
-const ProductInfo: FC<Props> = ({id, full_name, parameters, image }) => {
+const ProductInfo: FC<Props> = ({id, full_name, parameters, image}) => {
 
     const { session_id } = useSsid()
     const { is_authenticated } = useAuth()
@@ -30,6 +30,7 @@ const ProductInfo: FC<Props> = ({id, full_name, parameters, image }) => {
             },
         })
     }
+
 
     return (
         <div className="product">

@@ -17,7 +17,7 @@ const Filter: FC<FilterData> = ({ searchValue, setSearchValue, send}) => {
                 <Container style={{ transform: "translateY(-40%)", paddingBottom: "20px", paddingLeft: "20px", borderBottom: "solid 1px #9e9b9b" }}>
                     <Row><h4 className="filter-text">ФИО</h4></Row>
                     <Row style={{ display: "flex", transform: "translateY(-20%)" }}>
-                        <input className="filter-input"
+                        <input className = "fio-input"
                             type="text"
                             autoComplete="off"
                             size={30}

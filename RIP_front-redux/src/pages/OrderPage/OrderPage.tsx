@@ -26,13 +26,17 @@ interface Response {
     eventstatus: string,
     status: "I" | "P" | "D" | "A" | "W",
     user_id: number,
-    moder_id: number
+    moder_id: number,
+    team_name: string,
     positions: Position[]
 }
 
 const OrderPage: FC = () => {
+    const [ teamName, setTeamName ] = useState<string>('');
     const [ loading, setLoading ] = useState<boolean> (true)
     const navigate = useNavigate()
+    const [Message, setErrorMessage] = useState('')
+    const [showPopup, setShowPopup] = useState(false)
     const dispatch = useDispatch()
     const { id } = useParams()
     const { session_id } = useSsid()
@@ -50,12 +54,47 @@ const OrderPage: FC = () => {
                 },
             })
             setData(response.data)
+            setTeamName(response.data.team_name)
         } catch (error) {
             console.log(error)
             navigate('/products')
             resetButton()
         }
         
+    }
+
+    useEffect(() => {
+        if (showPopup) {
+            const timeout = window.setTimeout(() => {
+                // Начинаем процесс плавного исчезновения
+                setShowPopup(false);
+            }, 5000); // Таймер задан на 5 секунд
+
+            return () => {
+                window.clearTimeout(timeout);
+            };
+        }
+    }, [showPopup]);
+
+    const saveTeamName = async () => {
+        try {
+            await axios(`http://localhost:8000/request/${id}/tname/`, {
+                method: "PUT",
+                data: { 
+                    team_name: teamName 
+                },
+                headers: { 
+                    'authorization': session_id 
+                }
+            })
+            setErrorMessage('Название команды успешно задано!')
+            setShowPopup(true);
+        } catch (error: any) {
+            if (error.response.status === 400) {
+                setErrorMessage('Введите название команды!')
+                setShowPopup(true) // Показываем всплывающее окно
+            }
+        }
     }
 
     useEffect(() => {
@@ -73,12 +112,17 @@ const OrderPage: FC = () => {
                 method: "PUT",
                 headers: {
                     'authorization': session_id
-                }
+                },
+                data:{
+                    "team_name" : teamName
+                },
             })
             resetButton()
             navigate('/orders')
         } catch (error) {
             console.log(error)
+            setErrorMessage('Введите название команды!')
+            setShowPopup(true);
         }
     }
 
@@ -143,6 +187,7 @@ const OrderPage: FC = () => {
     return (
         <> {loading ? <Loader /> :
         <Container>
+            {showPopup && <div className="popup-message">{Message}</div>}
             <Row>
                 {data && data.status == 'I' ? <Breadcrumbs pages={[ { link: `/orders`, title: `мои заявки` }, { link: `/orders/${id}`, title: `команда` } ]} /> :
                 data && <Breadcrumbs pages={[ { link: `/orders`, title: `мои заявки` }, { link: `/orders/${id}`, title: `Заявка №${data.id} от ${data.send?.slice(0, 10)}` } ]} /> }
@@ -158,12 +203,35 @@ const OrderPage: FC = () => {
                         <button className="delete-button" onClick={deleteCart}>Удалить заявку</button>
                     </Col>}
                 </Row>
+                <Row style = {{ display: "flex"}}>
+                    {data && data.status == 'I' ?
+                        <>
+                        <Col style={{ marginTop: "10px" }} md={6}>
+                            <input
+                                type="text"
+                                value={teamName}
+                                onChange={(e) => setTeamName(e.target.value)}
+                                placeholder="Введите название команды"
+                                className="team-input" />
+                        </Col>
+                        <Col style={{ marginLeft: "10px", marginTop: "10px", marginRight: "250px" }} md={6}>
+                            <button onClick={saveTeamName} className="save-btn">Сохранить</button>
+                        </Col>
+                        </>
+                    :
+                    <>
+                        <Col style = {{marginTop: "-10px", marginBottom: "-20px"}} className="cart-main-text">
+                            Название команды: {teamName}
+                        </Col>
+                    </>
+                    }
+                </Row>
                 <Row style={{ display: "flex", flexWrap: "wrap", height: "max-content", position: "relative", top: "-10px" }}>
                     {data && data.status == 'I' ? data.positions.map((pos: Position)  => {
                         const product = pos.participant_data
                         return (
                             <div>
-                                <button className="remove-button" onClick={() => {deleteFromCart(product.id)}}>Убрать из команды</button>
+                                <button style = {{marginLeft: "-40px"}} className="remove-button" onClick={() => {deleteFromCart(product.id)}}>Убрать из команды</button>
                                 <ProductCardWithCount key={product.id} id={product.id} full_name={product.full_name} image={product.image} is_capitan={pos.is_capitan} buttonStatus = {true} getData={getData}/>
                             </div>
                         )}

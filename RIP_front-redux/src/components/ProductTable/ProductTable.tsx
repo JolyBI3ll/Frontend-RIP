@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 import "./ProductTable.css"
 import ImageWrapper from '../ImageWrapper/ImageWrapper'
 
@@ -49,7 +49,7 @@ const ProductTable: FC<Props> = ({ participants, deleteProduct }) => {
                 <Col className="product-table-head" style={{ width: "13%" }}><h2>Действия</h2></Col>
             </Row>
             {participants.map((participant, index) => (
-                <Row className="product-table-row" key={index} style={{ display: "flex", padding: "15px", backgroundColor: `${getStatusColor(participant.status)}`, borderTop: "2px groove black" }}>
+                <Row className="product-table-row" key={participant.id} style={{ display: "flex", padding: "15px", backgroundColor: `${getStatusColor(participant.status)}`, borderTop: "2px groove black" }}>
                     <Col className="product-table-col" style={{ width: "20%" }}><h2>{participant.full_name}</h2></Col> 
                     <Col className="product-table-col" style={{ width: "13%", display: "flex", flexDirection: "column" }}>
                         <h2>{getTextStatus(participant)}</h2>
@@ -59,7 +59,7 @@ const ProductTable: FC<Props> = ({ participants, deleteProduct }) => {
                     </Col>
                     <Col className="product-table-col" style={{ width: "28%" }}><div><ImageWrapper className="product-table-image" src={participant.image} based="/default.jpg" /></div></Col>
                     <Col className="product-table-col" style={{ width: "13%", display: "flex", flexDirection: "column" }}>
-                        <a href={`/products/${participant.id}`}><h2>посмотреть</h2></a>
+                        <Link to={`/products/${participant.id}`}><h2>посмотреть</h2></Link>
                         <button className="update-product-button" onClick={() => navigate(`/products/${participant.id}/update`)}>Изменить</button>
                     </Col>
                 </Row>

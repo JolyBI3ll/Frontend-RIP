@@ -3,7 +3,22 @@
     border-radius: 10px;
     text-align: center;
 }
-
+.accept-button{
+    width: 80px;
+    height: 30px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 10px;
+    font-weight: 300;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
+    cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 400;
+    justify-content: center;
+    text-align: center;
+}
 #order-table > .row > .order-table-col > h2,
 #order-table > .row > .order-table-col > a > h2 {
     font-size: 18px;

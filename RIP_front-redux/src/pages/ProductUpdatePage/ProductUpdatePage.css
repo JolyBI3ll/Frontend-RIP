@@ -45,19 +45,21 @@ textarea {
     margin-top: 30px;
     transform: translateX(-50%);
     margin-left: 50%;
-    border: 2px solid black;
-    border-radius: 7px;
-    background-color: #9695d4;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-align: center;
-    width: 150px;
-    height: 40px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
+    cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
+    width: 320px;
+    height: 50px;
 }
 
 #product-form-submit-button:hover {
-    background-color: #7c7acc;
+    color: #2062cb;
+    border-color: #2062cb;
 }

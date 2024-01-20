@@ -8,20 +8,21 @@
 }
 
 .main-add-button {
+    margin-top: -15px;
     position: relative;
     left: 90px;
-    top: -60px;
-    border-radius: 7px;
     width: 200px;
-    height: 35px;
-    font-size: 13px;
-    border: groove 1px rgb(216, 216, 216);
-    background-color: #9695d4;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    height: 50px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
-    text-align: center;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
 }
 
 .main-add-button-grey {
@@ -56,5 +57,6 @@
 }
 
 .main-add-button:hover {
-    background-color: #7c7acc;
+    color: #2062cb;
+    border-color: #2062cb;
 }

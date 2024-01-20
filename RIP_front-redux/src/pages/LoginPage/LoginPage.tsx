@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
-
+import { Link } from 'react-router-dom';
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs"
 
 import { Container, Row, Col } from "react-bootstrap"
@@ -30,7 +30,7 @@ const LoginPage: FC = () => {
                 <Container style={{ marginLeft: "30px", marginTop: "30px" }}>
                     <Row style={{ display: "flex" }}>
                         <h1 style={{ fontSize: "36px", fontWeight: "500" }}>Вход в аккаунт</h1>
-                        <a href="/register" className="form-link"><h3>Перейти к регистрации</h3></a>
+                        <Link to="/register" className="form-link"><h3>Перейти к регистрации</h3></Link>
                     </Row>
                     <form onSubmit={ handleLogin } id="login-form" style={{ marginTop: "30px" }}>
                         <Row>
@@ -52,7 +52,7 @@ const LoginPage: FC = () => {
                         <Row>
                             <Col className="left-col"></Col>
                             <Col className="right-col">
-                                <button id="login-button" className="EntButton" type="submit">Войти!</button>
+                                <button id="login-button" className="button" type="submit">Войти!</button>
                             </Col>
                         </Row>
                     </form>

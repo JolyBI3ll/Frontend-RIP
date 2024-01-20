@@ -28,13 +28,23 @@
     border-radius: 7px;
     width: 100px;
     height: 40px;
-    font-size: 18px;
-    background-color: rgb(187, 187, 250);
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    font-weight: 300;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
+    text-align: center;
 }
 
 .activate-product-button:hover {
-    background-color: rgb(158, 158, 244);
+    color: #2062cb;
+    border-color: #2062cb;
 }
 
 .delete-product-button {
@@ -42,13 +52,23 @@
     border-radius: 7px;
     width: 100px;
     height: 40px;
-    font-size: 18px;
-    background-color: rgb(255, 154, 179);
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    font-weight: 300;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
+    text-align: center;
 }
 
 .delete-product-button:hover {
-    background-color: rgb(237, 104, 137);
+    color: #2062cb;
+    border-color: #2062cb;
 }
 
 .update-product-button {
@@ -56,13 +76,23 @@
     border-radius: 7px;
     width: 100px;
     height: 40px;
-    font-size: 18px;
-    background-color: rgb(250, 246, 136);
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    font-weight: 300;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
+    text-align: center;
 }
 
 .update-product-button:hover {
-    background-color: rgb(236, 232, 110);
+    color: #2062cb;
+    border-color: #2062cb;
 }
 
 .product-table-image {
@@ -70,15 +100,24 @@
 }
 
 .create-product-button {
-    margin-left: 60px;
+    margin-left: 15px;
     margin-top: 30px;
-    border-radius: 7px;
     width: 200px;
     height: 40px;
-    font-size: 18px;
+    padding: 7px;
+    color: #2EB3EC;
+    font-size: 14px;
+    font-weight: 300;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #2EB3EC;
     cursor: pointer;
+    letter-spacing: .1em;
+    font-weight: 600;
+    justify-content: center;
+    text-align: center;
 }
-
 .create-product-button:hover {
-    background-color: rgb(129, 231, 105);
+    color: #2062cb;
+    border-color: #2062cb;
 }

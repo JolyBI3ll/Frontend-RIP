@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
 import { useState, useEffect } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs"
-
+import { Link } from 'react-router-dom';
 import { Container, Row, Col } from "react-bootstrap"
 import "./RegisterPage.css"
 
@@ -57,7 +57,7 @@ const RegisterPage: FC = () => {
                 <Container style={{ marginLeft: "30px", marginTop: "30px" }}>
                     <Row style={{ display: "flex" }}>
                         <h1 style={{ fontSize: "36px", fontWeight: "500" }}>Регистрация</h1>
-                        <a href="/login" className="form-link"><h3>Вход в аккаунт</h3></a>
+                        <Link to="/login" className="form-link"><h3>Вход в аккаунт</h3></Link>
                     </Row>
                     <form onSubmit={ handleRegister } id="login-form" style={{ marginTop: "30px" }}>
                         <Row>
@@ -79,7 +79,7 @@ const RegisterPage: FC = () => {
                         <Row>
                             <Col className="left-col"></Col>
                             <Col className="right-col">
-                                <button id="register-button" className="EntButton" type="submit">Зарегистироваться!</button>
+                                <button id="register-button" className="button" type="submit">Зарегистироваться!</button>
                             </Col>
                         </Row>
                     </form>

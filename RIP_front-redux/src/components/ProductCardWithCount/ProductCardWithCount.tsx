@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { useSsid } from '../../hooks/useSsid';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 import './ProductCardWithCount.css';
 
 
@@ -41,12 +41,12 @@ const ProductCardWithCount: FC<ProductCardData> = ({ id, full_name, image, is_ca
     }
 
     return (
-        <Card className="card">
-            <div className="cardImageWrap"><a href={"/products/" + id.toString()}><Card.Img className="cardImage" src={image} height={100} width={100} /></a></div>
-            <div className="cardTitleWrap"><a href={"/products/" + id.toString()}><Card.Title className="cardTitle">{full_name}</Card.Title></a></div>
+        <Card style = {{marginLeft: "0px", marginRight: "10px"}} className="card">
+            <div className="cardImageWrap"><Link to={"/products/" + id.toString()}><Card.Img className="cardImage" src={image} height={100} width={100} /></Link></div>
+            <div className="cardTitleWrap"><Link to={"/products/" + id.toString()}><Card.Title className="cardTitle">{full_name}</Card.Title></Link></div>
             {buttonStatus === true &&
             <div style={{ position: "relative", top: "-30px" }}>
-                <button className='cardStatusGreen' style = {{marginTop: '25px', marginRight: '200px'}} onClick= {handleButtonClick}>Сменить статус капитана</button>
+                <button className='cap-button' style = {{marginTop: '25px', marginRight: '200px'}} onClick= {handleButtonClick}>Сменить статус капитана</button>
             </div>
             }
             <div style = {{marginTop: '-30px'}}>

@@ -54,7 +54,7 @@ const ProductPage: FC = () => {
                 {product && id && <Breadcrumbs pages={[ { link: `/products/${id}`, title: `${product.full_name}` } ]} />}
             </Row>
             <Row>
-                {product && id && <ProductInfo id={parseInt(id)} full_name={product.full_name} parameters={parameters} image={product.image} />}
+                {product && id && <ProductInfo id={parseInt(id)} full_name={product.full_name} parameters={parameters} image={product.image}/>}
             </Row>
         </Container>
     )

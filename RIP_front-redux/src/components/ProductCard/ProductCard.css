@@ -1,10 +1,11 @@
 .card {
+    margin-bottom: -50px;
     width: 300px;
     height: 450px;
     border: groove 1px rgb(216, 216, 216);
     text-align: center;
     margin-left: 40px;
-    margin-top: 50px;
+    margin-top: 65px;
 }
 
 .cardImageWrap {
@@ -37,12 +38,12 @@
 .cardTitle {
     position: relative;
     line-height: 1.5;
-    color: rgb(0, 107, 213);
+    color: black;
     text-decoration: none;
 }
 
 .cardTitle:hover {
-    color: rgb(121, 0, 213);
+    color: #2062cb;
     text-decoration: underline;
 }
 
