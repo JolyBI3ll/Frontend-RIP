@@ -200,9 +200,10 @@
     padding: 7px;
     font-size: 28px;
     font-weight: 300;
-    background-color: rgb(152, 152, 152);
-    border: none;
-    border-radius: 10px;
+    background-color: white;
+    color: rgb(152, 152, 152);
+    border: 2px solid rgb(152, 152, 152);
+    border-radius: 50px;
 }
 
 .help-text {
